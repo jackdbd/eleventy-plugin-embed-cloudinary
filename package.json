@@ -32,7 +32,8 @@
     "size": "size-limit",
     "size:why": "size-limit --why",
     "start": "tsdx watch --entry ./src/.eleventy.ts --target node --verbose",
-    "test": "tsdx test"
+    "test:config": "tsdx test --showConfig",
+    "test": "tsdx test --detectOpenHandles --coverage=true --verbose"
   },
   "husky": {
     "hooks": {

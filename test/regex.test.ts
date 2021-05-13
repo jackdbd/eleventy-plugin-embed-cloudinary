@@ -10,6 +10,11 @@ const format = 'png';
 describe('getData', () => {
   const html = `<p><a href="https://res.cloudinary.com/${cloudName}/image/upload/v${version}/${publicId}.${format}">https://res.cloudinary.com/${cloudName}/image/upload/v${version}/${publicId}.${format}</a></p>`;
 
+  it('returns `null` when there are no matches', () => {
+    const result = getData('<div>Nothing here</div>');
+    expect(result).toBeNull();
+  });
+
   it('returns an object with the expected properties', () => {
     const result = getData(html);
     expect(result).toHaveProperty('cloudName');
