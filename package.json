@@ -17,11 +17,18 @@
   "engines": {
     "node": ">=10"
   },
+  "keywords": [
+    "11ty",
+    "cloudinary",
+    "eleventy",
+    "eleventy-plugin",
+    "image"
+  ],
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "tsdx build --entry ./src/.eleventy.ts --target node && mv dist/index.js dist/.eleventy.js",
     "lint": "tsdx lint",
-    "prepare": "tsdx build",
+    "prepare": "tsdx build --entry ./src/.eleventy.ts --target node && mv dist/index.js dist/.eleventy.js",
     "size": "size-limit",
     "size:why": "size-limit --why",
     "start": "tsdx watch --entry ./src/.eleventy.ts --target node --verbose",
