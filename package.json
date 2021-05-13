@@ -1,8 +1,15 @@
 {
-  "version": "0.1.0",
+  "name": "eleventy-plugin-embed-cloudinary",
+  "description": "Eleventy plugin to automatically embed images hosted on Cloudinary.",
+  "author": "Giacomo Debidda",
   "license": "MIT",
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jackdbd/eleventy-plugin-embed-cloudinary.git"
+  },
+  "main": "dist/.eleventy.js",
+  "typings": "dist/.eleventy.d.ts",
   "files": [
     "dist",
     "src"
@@ -11,15 +18,15 @@
     "node": ">=10"
   },
   "scripts": {
-    "start": "tsdx watch",
-    "build": "tsdx build",
-    "test": "tsdx test",
+    "prebuild": "rm -rf dist",
+    "build": "tsdx build --entry ./src/.eleventy.ts --target node && mv dist/index.js dist/.eleventy.js",
     "lint": "tsdx lint",
     "prepare": "tsdx build",
     "size": "size-limit",
-    "analyze": "size-limit --why"
+    "size:why": "size-limit --why",
+    "start": "tsdx watch --entry ./src/.eleventy.ts --target node --verbose",
+    "test": "tsdx test"
   },
-  "peerDependencies": {},
   "husky": {
     "hooks": {
       "pre-commit": "tsdx lint"
@@ -31,8 +38,6 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "eleventy-plugin-embed-cloudinary",
-  "author": "Giacomo Debidda",
   "module": "dist/eleventy-plugin-embed-cloudinary.esm.js",
   "size-limit": [
     {
@@ -44,15 +49,16 @@
       "limit": "50 B"
     }
   ],
+  "dependencies": {
+    "@11ty/eleventy-cache-assets": "^2.2.1"
+  },
   "devDependencies": {
+    "@11ty/eleventy": "^0.12.1",
     "@size-limit/preset-small-lib": "^4.10.2",
     "husky": "^6.0.0",
     "size-limit": "^4.10.2",
     "tsdx": "^0.14.1",
     "tslib": "^2.2.0",
     "typescript": "^4.2.4"
-  },
-  "dependencies": {
-    "@11ty/eleventy-cache-assets": "^2.2.1"
   }
 }

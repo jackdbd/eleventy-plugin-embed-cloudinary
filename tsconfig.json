@@ -7,9 +7,8 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "importHelpers": true,
-    "lib": ["dom", "esnext"],
-    "module": "esnext",
-    // use Node's module resolution algorithm, instead of the legacy TS one
+    "lib": ["ESNext"],
+    "module": "ESNext",
     "moduleResolution": "node",
     "noEmit": true,
     "noFallthroughCasesInSwitch": true,
@@ -17,7 +16,6 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "removeComments": true,
-    // match output dir to input dir. e.g. dist/index instead of dist/src/index
     "rootDir": "./src",
     // significant perf increase by skipping checking .d.ts files, particularly those in node_modules. Recommended by TS
     "skipLibCheck": true,

@@ -1,9 +1,9 @@
-import { defaultConfig, PluginConfig, UserConfig } from './config';
+import { PluginConfig } from './config';
 import { getData, getMatches } from './regex';
 import { fetchFromCloudinary } from './cloudinary-api-client';
 import { cloudinaryRespImage } from './shortcodes';
 
-const makeEmbedCloudinary = (pluginConfig: PluginConfig) => {
+export const makeEmbedCloudinary = (pluginConfig: PluginConfig) => {
   return async (content: string, outputPath: string) => {
     if (outputPath && outputPath.endsWith('.html')) {
       const matches = getMatches(content);
@@ -40,14 +40,3 @@ const makeEmbedCloudinary = (pluginConfig: PluginConfig) => {
     return content;
   };
 };
-
-export default async function(eleventyConfig: any, userConfig: UserConfig) {
-  const pluginConfig = Object.assign({}, defaultConfig, userConfig);
-  // One can manually use the shortcode...
-  eleventyConfig.addShortcode('cloudinaryRespImage', cloudinaryRespImage);
-  // ...or use the transform.
-  eleventyConfig.addTransform(
-    'embedCloudinary',
-    makeEmbedCloudinary(pluginConfig)
-  );
-}
