@@ -1,18 +1,22 @@
 {
   "name": "eleventy-plugin-embed-cloudinary",
   "description": "Eleventy plugin to automatically embed images hosted on Cloudinary.",
-  "author": "Giacomo Debidda",
   "license": "MIT",
-  "version": "0.1.0",
+  "version": "0.0.1",
+  "author": {
+    "name": "Giacomo Debidda",
+    "email": "jackdebidda@gmail.com",
+    "url": "https://giacomodebidda.com/"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jackdbd/eleventy-plugin-embed-cloudinary.git"
   },
   "main": "dist/.eleventy.js",
+  "module": "dist/eleventy-plugin-embed-cloudinary.esm.js",
   "typings": "dist/.eleventy.d.ts",
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "engines": {
     "node": ">=10"
@@ -28,17 +32,16 @@
     "prebuild": "rm -rf dist",
     "build": "tsdx build --entry ./src/.eleventy.ts --target node && mv dist/index.js dist/.eleventy.js",
     "lint": "tsdx lint",
-    "prepare": "tsdx build --entry ./src/.eleventy.ts --target node && mv dist/index.js dist/.eleventy.js",
+    "prepare": "husky install",
+    "prepublishOnly": "npm run build",
+    "postpublish": "echo POSTPUBLISH",
+    "release:minor": "xyz --branch main --increment minor --publish-command 'npm publish' --script './xyz-script'",
+    "release:patch": "xyz --branch main --increment patch --publish-command 'npm publish' --script './xyz-script'",
     "size": "size-limit",
     "size:why": "size-limit --why",
     "start": "tsdx watch --entry ./src/.eleventy.ts --target node --verbose",
-    "test:config": "tsdx test --showConfig",
-    "test": "tsdx test --detectOpenHandles --coverage=true --verbose"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "tsdx lint"
-    }
+    "test": "tsdx test --detectOpenHandles --coverage=true --verbose",
+    "test:config": "tsdx test --showConfig"
   },
   "prettier": {
     "printWidth": 80,
@@ -46,7 +49,6 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "module": "dist/eleventy-plugin-embed-cloudinary.esm.js",
   "size-limit": [
     {
       "path": "dist/eleventy-plugin-embed-cloudinary.cjs.production.min.js",
@@ -67,6 +69,7 @@
     "size-limit": "^4.10.2",
     "tsdx": "^0.14.1",
     "tslib": "^2.2.0",
-    "typescript": "^4.2.4"
+    "typescript": "^4.2.4",
+    "xyz": "^4.0.0"
   }
 }
