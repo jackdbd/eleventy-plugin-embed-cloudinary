@@ -1,0 +1,6 @@
+#!/bin/sh
+
+echo "POSTPUBLISH"
+
+echo "Restore original package.json"
+mv package.json.backup package.json

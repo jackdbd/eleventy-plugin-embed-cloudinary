@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+set -euxo pipefail
+
+echo "PREPUBLISH"
+
+cleanup_package_json() {
+    local FIELDS_TO_KEEP="\"author\",\"bugs\",\"dependencies\",\"description\",\"engines\",\"files\",\"keywords\",\"license\",\"main\",\"name\",\"repository\",\"scripts\",\"typings\",\"version\""
+    local SCRIPTS_TO_KEEP="\"postpack|postpublish|postrelease\""
+    local REGEX="(${SCRIPTS_TO_KEEP})"
+
+    jq "{${FIELDS_TO_KEEP}}" package.json.backup | \
+    jq 'with_entries(select(.value |. != null))' | \
+    jq ".scripts|=with_entries(select(.key|test(${REGEX})))"
+}
+
+echo "Compile Typescript files"
+npm run build
+
+# TODO: run size-limit? snyk?
+
+echo "Prepare package.json for 'npm publish'"
+# https://stackoverflow.com/questions/48802204/npm-publish-removing-scripts-from-package-json
+# https://github.com/roydukkey/clean-package
+echo "Backup original package.json"
+cp package.json package.json.backup
+
+echo "Cleanup package.json from unnecessary fields and scripts"
+cleanup_package_json
