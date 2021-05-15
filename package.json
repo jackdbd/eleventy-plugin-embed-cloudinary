@@ -2,7 +2,7 @@
   "name": "eleventy-plugin-embed-cloudinary",
   "description": "Eleventy plugin to automatically embed images hosted on Cloudinary.",
   "license": "MIT",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": {
     "name": "Giacomo Debidda",
     "email": "jackdebidda@gmail.com",
