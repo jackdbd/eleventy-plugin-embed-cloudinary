@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-readonly PACKAGE_JSON_BACKUP_FILE=package.json.backup
-
 echo "Restore original package.json"
+readonly PACKAGE_JSON_BACKUP_FILE=package.json.backup
 mv ${PACKAGE_JSON_BACKUP_FILE} package.json

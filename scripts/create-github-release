@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# readonly GITHUB_RELEASE_TAG=test-tag
+readonly GITHUB_RELEASE_TAG=$(git describe --tags)
+readonly GITHUB_RELEASE_TITLE="Version $(git describe --tags | tr --delete 'v')"
+
+readonly NOTES_FILE="$(pwd)/CHANGELOG.md"
+
+readonly GITHUB_RELEASE_CREATE="gh release create ${GITHUB_RELEASE_TAG} --notes-file ${NOTES_FILE} --title \"${GITHUB_RELEASE_TITLE}\""
+readonly GITHUB_RELEASE_VIEW="gh release view ${GITHUB_RELEASE_TAG} --web"
+
+echo "Create GitHub release"
+eval ${GITHUB_RELEASE_CREATE}
+
+echo "Upload dependency graphs to GitHub release ${GITHUB_RELEASE_TAG}"
+depcruise --include-only "^src" --output-type dot src | dot -T svg > dependencygraph.svg
+depcruise --output-type dot src | dot -T svg > dependencygraph-with-dependencies.svg
+gh release upload ${GITHUB_RELEASE_TAG} dependencygraph.svg dependencygraph-with-dependencies.svg
+rm dependencygraph.svg dependencygraph-with-dependencies.svg
+
+eval ${GITHUB_RELEASE_VIEW}

@@ -1,19 +1,33 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# VERSION and PREVIOUS_VERSION are environment variables set by xyz
-echo "Bump from ${PREVIOUS_VERSION} to ${VERSION} and update CHANGELOG.md"
-auto-changelog --package --sort-commits date-desc --commit-limit false
-git add CHANGELOG.md
+# For testing this script
+# PREVIOUS_VERSION=0.0.0
+# VERSION=0.0.1
 
-readonly GITHUB_RELEASE_TAG="v${VERSION}"
-readonly GITHUB_RELEASE_TITLE="Version ${VERSION}"
-readonly GH_RELEASE_CMD="gh release create ${GITHUB_RELEASE_TAG} --notes-file CHANGELOG.md --title \"${GITHUB_RELEASE_TITLE}\""
+readonly PACKAGE_JSON_BACKUP_FILE=package.json.backup
 
-publish_github_release() {
-    echo "COMMAND TO EXECUTE: ${GH_RELEASE_CMD}"
-    eval ${GH_RELEASE_CMD}
+# We need to bump "version" in package.json before generating a CHANGELOG.
+# However, xyz bumps "version" too. To avoid a double bump, we save and restore
+# package.json.
+update_changelog() {
+    # VERSION and PREVIOUS_VERSION are environment variables set by xyz
+    echo "Update CHANGELOG.md: ${PREVIOUS_VERSION} ==> ${VERSION}"
+
+    [ -f ${PACKAGE_JSON_BACKUP_FILE} ] && rm ${PACKAGE_JSON_BACKUP_FILE}
+    cp package.json ${PACKAGE_JSON_BACKUP_FILE}
+
+    # jq cannot edit files in place
+    # https://github.com/stedolan/jq/issues/105
+    # https://stackoverflow.com/questions/36565295/jq-to-replace-text-directly-on-file-like-sed-i
+    jq ".version|=\"${VERSION}\"" package.json > package.json.tmp && \
+    mv package.json.tmp package.json
+
+    auto-changelog --package --sort-commits date-desc --commit-limit false
+    git add CHANGELOG.md
+
+    rm package.json
+    mv ${PACKAGE_JSON_BACKUP_FILE} package.json
 }
 
-publish_github_release
-gh release list
+update_changelog

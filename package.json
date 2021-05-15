@@ -34,15 +34,18 @@
     "lint": "tsdx lint",
     "prepare": "husky install",
     "prepack": "npm run build && ./scripts/clean-package-json",
-    "postpack": "./scripts/restore-package-json",
-    "release:minor": "xyz --branch main --increment minor --publish-command 'npm publish' --script './scripts/update-changelog'",
-    "release:patch": "xyz --branch main --increment patch --publish-command 'npm publish' --script './scripts/update-changelog'",
+    "postpack": "./scripts/restore-package-json && ./scripts/create-github-release",
+    "prerelease": "echo PRELEASE",
+    "release": "xyz --branch main --publish-command 'npm publish' --script './scripts/update-changelog'",
+    "release:patch": "npm run release -- --increment patch",
+    "release:minor": "npm run release -- --increment minor",
+    "release:major": "npm run release -- --increment major",
+    "postrelease": "echo POSTRELEASE",
     "size": "size-limit",
     "size:why": "size-limit --why",
     "start": "tsdx watch --entry ./src/.eleventy.ts --target node --verbose",
     "test": "tsdx test --detectOpenHandles --coverage=true --verbose",
-    "test:config": "tsdx test --showConfig",
-    "version": "auto-changelog --package && git add CHANGELOG.md"
+    "test:config": "tsdx test --showConfig"
   },
   "prettier": {
     "printWidth": 80,

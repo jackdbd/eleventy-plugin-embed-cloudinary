@@ -15,7 +15,9 @@ cleanup_package_json() {
 
 # TODO: run size-limit? snyk?
 
-echo "Backup original package.json"
+[ -f ${PACKAGE_JSON_BACKUP_FILE} ] && rm ${PACKAGE_JSON_BACKUP_FILE}
+
+# echo "Backup original package.json"
 cp package.json ${PACKAGE_JSON_BACKUP_FILE}
 
 # https://stackoverflow.com/questions/48802204/npm-publish-removing-scripts-from-package-json

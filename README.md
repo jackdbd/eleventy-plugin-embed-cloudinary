@@ -40,3 +40,11 @@ Maecenas non velit nibh. Aenean eu justo et odio commodo ornare. In scelerisque 
 ## Configuration
 
 TODO: docs
+
+## Release management
+
+This project uses a combination of bash scripts, [xyz](https://github.com/davidchambers/xyz), [auto-changelog](https://github.com/cookpete/auto-changelog) and the [GitHub CLI](https://github.com/cli/cli) to automate the creation of a Changelog, a GitHub release and to publish a new version on NPM.
+
+```sh
+npm run release:patch # or minor,major
+```
