@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# This script is useful when npm publish fails for whatever reason and we need
+# to delete the GitHub release and cleanup the repo.
+
+readonly TAG=$(git describe --tags)
+
+echo "Delete tag ${TAG}, delete GitHub release ${TAG} and reset last commit (don't forget to delete the tag on GitHub)"
+git tag -d ${TAG}
+
+echo "Delete GitHub release ${TAG} (don't forget to delete the tag on GitHub)"
+gh release delete ${TAG}
+
+echo "Reset last commit"
+git reset --hard HEAD~
