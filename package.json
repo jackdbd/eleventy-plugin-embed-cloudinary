@@ -33,16 +33,16 @@
     "build": "tsdx build --entry ./src/.eleventy.ts --target node && mv dist/index.js dist/.eleventy.js",
     "lint": "tsdx lint",
     "prepare": "husky install",
-    "prepublishOnly": "./scripts/prepublish-only",
-    "postpack": "echo POSTPACK",
-    "postpublish": "./scripts/postpublish",
-    "release:minor": "xyz --branch main --increment minor --publish-command 'npm publish' --script './scripts/after-xyz-prompt.js'",
-    "release:patch": "xyz --branch main --increment patch --publish-command 'npm publish' --script './scripts/after-xyz-prompt.js'",
+    "prepack": "npm run build && ./scripts/clean-package-json",
+    "postpack": "./scripts/restore-package-json",
+    "release:minor": "xyz --branch main --increment minor --publish-command 'npm publish' --script './scripts/update-changelog'",
+    "release:patch": "xyz --branch main --increment patch --publish-command 'npm publish' --script './scripts/update-changelog'",
     "size": "size-limit",
     "size:why": "size-limit --why",
     "start": "tsdx watch --entry ./src/.eleventy.ts --target node --verbose",
     "test": "tsdx test --detectOpenHandles --coverage=true --verbose",
-    "test:config": "tsdx test --showConfig"
+    "test:config": "tsdx test --showConfig",
+    "version": "auto-changelog --package && git add CHANGELOG.md"
   },
   "prettier": {
     "printWidth": 80,
@@ -66,6 +66,7 @@
   "devDependencies": {
     "@11ty/eleventy": "^0.12.1",
     "@size-limit/preset-small-lib": "^4.10.2",
+    "auto-changelog": "^2.2.1",
     "husky": "^6.0.0",
     "size-limit": "^4.10.2",
     "tsdx": "^0.14.1",

@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# VERSION and PREVIOUS_VERSION are environment variables set by xyz
+echo "Bump from ${PREVIOUS_VERSION} to ${VERSION} and update CHANGELOG.md"
+auto-changelog --package --sort-commits date-desc --commit-limit false
+git add CHANGELOG.md
+
+readonly GITHUB_RELEASE_TAG="v${VERSION}"
+readonly GITHUB_RELEASE_TITLE="Version ${VERSION}"
+readonly GH_RELEASE_CMD="gh release create ${GITHUB_RELEASE_TAG} --notes-file CHANGELOG.md --title \"${GITHUB_RELEASE_TITLE}\""
+
+publish_github_release() {
+    echo "COMMAND TO EXECUTE: ${GH_RELEASE_CMD}"
+    eval ${GH_RELEASE_CMD}
+}
+
+publish_github_release
+gh release list
