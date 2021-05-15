@@ -34,6 +34,7 @@
     "lint": "tsdx lint",
     "prepare": "husky install",
     "prepublishOnly": "./scripts/prepublish-only",
+    "postpack": "echo POSTPACK",
     "postpublish": "./scripts/postpublish",
     "release:minor": "xyz --branch main --increment minor --publish-command 'npm publish' --script './scripts/after-xyz-prompt.js'",
     "release:patch": "xyz --branch main --increment patch --publish-command 'npm publish' --script './scripts/after-xyz-prompt.js'",
