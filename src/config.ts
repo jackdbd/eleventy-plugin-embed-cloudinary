@@ -1,29 +1,52 @@
-export interface BasicConfig {
-  cacheDirectory: string;
-  cacheDuration: string;
-  classString: string;
-  shouldLazyLoad: boolean;
-  shouldThrowOnMissingAlt: boolean;
-  shouldThrowOnMissingCaption: boolean;
-}
-
-export interface RequiredConfig {
+// Fields required to authenticate with Cloudinary.
+export interface CloudinaryAuthConfig {
   apiKey: string;
   apiSecret: string;
+  cloudName: string;
 }
 
-export interface PluginConfig extends BasicConfig {
-  apiKey: string;
-  apiSecret: string;
+// Optional fields to configure the Cloudinary client.
+export interface CloudinaryClientOptions {
+  shouldThrowOnMissingAlt?: boolean;
+  shouldThrowOnMissingCaption?: boolean;
 }
 
-export type UserConfig = RequiredConfig & Partial<BasicConfig>;
+export const defaultCloudinaryClientConfig: Required<CloudinaryClientOptions> = {
+  shouldThrowOnMissingAlt: false,
+  shouldThrowOnMissingCaption: false,
+};
 
-export const defaultConfig: BasicConfig = {
+// All non-Cloudinary optional fields.
+export interface NonCloudinaryOptions {
+  cacheDirectory?: string;
+  cacheDuration?: string;
+  classString?: string;
+  shouldLazyLoad?: boolean;
+}
+
+export const defaultNonCloudinaryConfig: Required<NonCloudinaryOptions> = {
   cacheDirectory: '.cache',
   cacheDuration: '30m',
   classString: '',
   shouldLazyLoad: true,
-  shouldThrowOnMissingAlt: false,
-  shouldThrowOnMissingCaption: false,
 };
+
+export type PluginOptions = CloudinaryClientOptions & NonCloudinaryOptions;
+
+export const defaultPluginConfig = {
+  ...defaultCloudinaryClientConfig,
+  ...defaultNonCloudinaryConfig,
+};
+
+// Configuration for any Cloudinary client. A Cloudinary client doesn't
+// necessarily cache HTTP requests.
+export type CloudinaryClientConfig = CloudinaryAuthConfig &
+  CloudinaryClientOptions;
+
+export type UserConfig = CloudinaryAuthConfig &
+  Partial<CloudinaryClientOptions> &
+  Partial<NonCloudinaryOptions>;
+
+export type PluginConfig = CloudinaryAuthConfig &
+  CloudinaryClientOptions &
+  NonCloudinaryOptions;
