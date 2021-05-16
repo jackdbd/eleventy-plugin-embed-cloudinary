@@ -1,9 +1,15 @@
-import { defaultConfig, UserConfig } from './config';
+import { defaultPluginConfig, PluginConfig, UserConfig } from './config';
 import { cloudinaryRespImage } from './shortcodes';
 import { makeEmbedCloudinary } from './transforms';
 
 export const configFunction = (eleventyConfig: any, userConfig: UserConfig) => {
-  const pluginConfig = Object.assign({}, defaultConfig, userConfig);
+  // plugin config with no missing fields
+  const pluginConfig: Required<PluginConfig> = Object.assign(
+    {},
+    defaultPluginConfig,
+    userConfig
+  );
+
   eleventyConfig.addShortcode('cloudinaryRespImage', cloudinaryRespImage);
   eleventyConfig.addTransform(
     'embedCloudinary',

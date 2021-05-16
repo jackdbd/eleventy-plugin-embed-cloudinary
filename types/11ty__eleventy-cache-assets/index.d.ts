@@ -1,9 +1,9 @@
 declare module '@11ty/eleventy-cache-assets' {
-  interface Options {
+  export interface EleventyCacheOptions {
     directory: string;
     duration: string;
     type: 'json' | 'text' | 'buffer';
   }
-  const Cache: (source: string, options: Options) => any;
+  const Cache: (source: string, options: EleventyCacheOptions) => Promise<any>;
   export default Cache;
 }
