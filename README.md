@@ -20,7 +20,8 @@ const embedCloudinary = require('eleventy-plugin-embed-cloudinary');
 module.exports = function(eleventyConfig) {
   eleventyConfig.addPlugin(embedCloudinary, {
     apiKey: 'YOUR_CLOUDINARY_API_KEY',
-    apiSecret: 'YOUR_CLOUDINARY_API_SECRET'
+    apiSecret: 'YOUR_CLOUDINARY_API_SECRET',
+    cloudName: 'YOUR_CLOUDINARY_CLOUD_NAME'
   });
 };
 ```
@@ -32,21 +33,42 @@ In your markdown file, just paste the URL of the image you want to include. The 
 ```mk
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vehicula, elit vel condimentum porta, purus.
 
-https://res.cloudinary.com/jackdbd/image/upload/v1620314435/waterfall_google_chrome_bp672m.png
+https://res.cloudinary.com/CLOUD_NAME/image/upload/VERSION/PUBLIC_ID.png
 
 Maecenas non velit nibh. Aenean eu justo et odio commodo ornare. In scelerisque sapien at.
 ```
 
+Where:
+
+- `CLOUD_NAME` is your Cloudinary [cloud name](https://cloudinary.com/documentation/how_to_integrate_cloudinary#create_and_tour_your_account);
+- `PUBLIC_ID` is the [unique identifier](https://cloudinary.com/documentation/upload_images#public_id) for the image hosted on your Cloudinary Media Library;
+- `VERSION` is the [asset version](https://cloudinary.com/documentation/upload_images#asset_versions) of the image.
+
 ## Configuration
 
-TODO: docs
+### Required
+
+- `apiKey` [string]: API key of your Cloudinary account
+- `apiSecret` [string]: API secret of your Cloudinary account
+- `cloudName` [string]: cloud name of your Cloudinary account
+
+### Optional
+
+- `cacheDirectory` [string] [default: `.cache`]: directory where the 11ty `Cache` (see [eleventy-cache-assets](https://github.com/11ty/eleventy-cache-assets)) stores the responses from the Cloudinary API (it is strongly recommended that you add this folder to your `.gitignore` file).
+- `cacheDuration` [string] [default: `30m`]: how long a response stored in the 11ty `Cache` should be considered valid. For the syntax, see [here](https://www.11ty.dev/docs/plugins/cache/#change-the-cache-duration).
+- `classString` [string] [default: `""`]: CSS class/es to apply to the generated `<img>` element.
+- `shouldLazyLoad` [boolean] [default: `true`]: whether the generated `<img>` element should have the attribute [loading="lazy"](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-loading) to instruct the browser to [defer loading the image](https://web.dev/browser-level-image-lazy-loading/) (browser support [here](https://caniuse.com/loading-lazy-attr)).
+- `shouldThrowOnMissingAlt` [boolean] [default: `false`]: whether this plugin should throw an error when fetching an image that does not have an `alt` attribute. See [here](https://support.cloudinary.com/hc/en-us/articles/202521142-Can-I-add-metadata-to-images-) how to add a Description (alt) to an image hosted on your Cloudinary Media Library.
+- `shouldThrowOnMissingCaption` [boolean] [default: `false`]: whether this plugin should throw an error when fetching an image that does not have a `caption` attribute. See [here](https://support.cloudinary.com/hc/en-us/articles/202521142-Can-I-add-metadata-to-images-) how to add a Title (caption) to an image hosted on your Cloudinary Media Library.
 
 ## Release management
 
-This project uses a combination of bash scripts, [xyz](https://github.com/davidchambers/xyz), [auto-changelog](https://github.com/cookpete/auto-changelog) and the [GitHub CLI](https://github.com/cli/cli) to automate the creation of a Changelog, a GitHub release and to publish a new version on NPM.
+This project uses a combination of bash scripts, [xyz](https://github.com/davidchambers/xyz), [auto-changelog](https://github.com/cookpete/auto-changelog) and the [GitHub CLI](https://github.com/cli/cli) to update the `CHANGELOG.md`, create a new GitHub release, and publish a new version of the [package on npm](https://www.npmjs.com/package/eleventy-plugin-embed-cloudinary).
+
+The version number is assigned according to [Semantic Versioning](http://semver.org/).
 
 ```sh
-npm run release:patch # 0.0.X
-npm run release:minor # 0.X.0
-npm run release:major # X.0.0
+npm run release:patch
+npm run release:minor
+npm run release:major
 ```
