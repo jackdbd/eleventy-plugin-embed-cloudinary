@@ -40,7 +40,7 @@
     "release:patch": "npm run release -- --increment patch",
     "release:minor": "npm run release -- --increment minor",
     "release:major": "npm run release -- --increment major",
-    "postrelease": "echo POSTRELEASE",
+    "postrelease": "echo 'See package on npm' && chromium-browser https://www.npmjs.com/package/eleventy-plugin-embed-cloudinary",
     "size": "size-limit",
     "size:why": "size-limit --why",
     "start": "tsdx watch --entry ./src/.eleventy.ts --target node --verbose",

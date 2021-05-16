@@ -1,5 +1,7 @@
 # eleventy-plugin-embed-cloudinary
 
+[![npm version](https://badge.fury.io/js/eleventy-plugin-embed-cloudinary.svg)](https://badge.fury.io/js/eleventy-plugin-embed-cloudinary) ![Snyk Vulnerabilities for npm package](https://img.shields.io/snyk/vulnerabilities/npm/eleventy-plugin-embed-cloudinary) [![codecov](https://codecov.io/gh/jackdbd/eleventy-plugin-embed-cloudinary/branch/main/graph/badge.svg?token=evryHx64zZ)](https://codecov.io/gh/jackdbd/eleventy-plugin-embed-cloudinary)
+
 Eleventy plugin to automatically embed in markdown files any image hosted on your Cloudinary Media Library.
 
 Write a URL → get a [responsive image](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images).
@@ -25,6 +27,10 @@ module.exports = function(eleventyConfig) {
   });
 };
 ```
+
+Your API key and API secret are **not** exposed in the generated HTML. They are used to fetch the images hosted on your Cloudinary Media Library at build time.
+
+⚠️ Don't forget to set the Cloudinary API key, API secret and cloud name on your build server. For example you could use [Netlify environment variables](https://docs.netlify.com/configure-builds/environment-variables/), [GitHub secrets](https://docs.github.com/en/actions/reference/encrypted-secrets), etc.
 
 ## Usage
 
