@@ -5,13 +5,18 @@ on:
   pull_request:
     branches: [ main ]
 jobs:
-  build:
-    name: Build and test on Node ${{ matrix.node }} and ${{ matrix.os }}
+  ci:
+    name: CI on ${{ matrix.os }}, Node ${{ matrix.node }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node: ['10.x', '12.x', '14.x']
         os: [ubuntu-latest, windows-latest, macOS-latest]
+        node: ['12.x', '14.x']
+    env:
+      CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
+      CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
+      CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
+      CLOUDINARY_IMAGE_PUBLIC_ID: ${{ secrets.CLOUDINARY_IMAGE_PUBLIC_ID }}
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
@@ -20,13 +25,18 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - name: Install dependencies
-        run: npm ci
+        run: rm package-lock.json && npm install
+      - name: Build
+        run: npm run build
       - name: Test
-        run: CLOUDINARY_CLOUD_NAME=${{ secrets.CLOUDINARY_CLOUD_NAME }} CLOUDINARY_API_KEY=${{ secrets.CLOUDINARY_API_KEY }} CLOUDINARY_API_SECRET=${{ secrets.CLOUDINARY_API_SECRET }} CLOUDINARY_IMAGE_PUBLIC_ID=${{ secrets.CLOUDINARY_IMAGE_PUBLIC_ID }} npm run test --ci --coverage --maxWorkers=2
-      - name: Jest coverage report
+        run: npm run test --ci --coverage --maxWorkers=2
+      - name: Upload coverage report to Coveralls
+        uses: coverallsapp/github-action@v1.1.2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Jest coverage report (only in PR)
+        if: ${{ github.event_name == 'pull_request' }}
         uses: ArtiomTr/jest-coverage-report-action@v1.3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          test_script: CLOUDINARY_CLOUD_NAME=${{ secrets.CLOUDINARY_CLOUD_NAME }} CLOUDINARY_API_KEY=${{ secrets.CLOUDINARY_API_KEY }} CLOUDINARY_API_SECRET=${{ secrets.CLOUDINARY_API_SECRET }} CLOUDINARY_IMAGE_PUBLIC_ID=${{ secrets.CLOUDINARY_IMAGE_PUBLIC_ID }} npm run test --ci --coverage --maxWorkers=2
-      - name: Build
-        run: npm run build
+          test_script: npm run test --ci --coverage

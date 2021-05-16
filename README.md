@@ -1,6 +1,6 @@
 # eleventy-plugin-embed-cloudinary
 
-[![npm version](https://badge.fury.io/js/eleventy-plugin-embed-cloudinary.svg)](https://badge.fury.io/js/eleventy-plugin-embed-cloudinary) ![Snyk Vulnerabilities for npm package](https://img.shields.io/snyk/vulnerabilities/npm/eleventy-plugin-embed-cloudinary) [![codecov](https://codecov.io/gh/jackdbd/eleventy-plugin-embed-cloudinary/branch/main/graph/badge.svg?token=evryHx64zZ)](https://codecov.io/gh/jackdbd/eleventy-plugin-embed-cloudinary)
+[![npm version](https://badge.fury.io/js/eleventy-plugin-embed-cloudinary.svg)](https://badge.fury.io/js/eleventy-plugin-embed-cloudinary) ![Snyk Vulnerabilities for npm package](https://img.shields.io/snyk/vulnerabilities/npm/eleventy-plugin-embed-cloudinary) ![ci workflow](https://github.com/jackdbd/eleventy-plugin-embed-cloudinary/actions/workflows/ci.yml/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/jackdbd/eleventy-plugin-embed-cloudinary/badge.svg?branch=main)](https://coveralls.io/github/jackdbd/eleventy-plugin-embed-cloudinary?branch=main)
 
 Eleventy plugin to automatically embed in markdown files any image hosted on your Cloudinary Media Library.
 
