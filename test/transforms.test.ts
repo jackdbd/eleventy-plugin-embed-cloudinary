@@ -58,9 +58,9 @@ describe('makeEmbedCloudinary', () => {
     });
     const embedCloudinary = makeEmbedCloudinary(pluginConfig);
 
-    await expect(
-      embedCloudinary(contentWithNotOwnedImage, 'some-file.html')
-    ).rejects.toThrowError(expectedErrorMessage);
+    expect(async () => {
+      await embedCloudinary(contentWithNotOwnedImage, 'some-file.html');
+    }).rejects.toThrowError(expectedErrorMessage);
   });
 
   it('transforms the HTML content as expected (network)', async () => {

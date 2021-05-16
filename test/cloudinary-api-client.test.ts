@@ -160,9 +160,9 @@ describe('fetchFromCloudinary (mock)', () => {
     const publicId = PUBLIC_ID_MISSING_ALT;
     const expectedErrorMessage = messageImageHasNoAlt(publicId);
 
-    await expect(fetchFromCloudinary(publicId)).rejects.toThrowError(
-      expectedErrorMessage
-    );
+    expect(async () => {
+      await fetchFromCloudinary(publicId);
+    }).rejects.toThrowError(expectedErrorMessage);
   });
 
   it('throws with the expected error message when the image `caption` is missing, and the client was configured to throw when this occurs (mock)', async () => {
@@ -177,9 +177,9 @@ describe('fetchFromCloudinary (mock)', () => {
     const publicId = PUBLIC_ID_MISSING_CAPTION;
     const expectedErrorMessage = messageImageHasNoCaption(publicId);
 
-    await expect(fetchFromCloudinary(publicId)).rejects.toThrowError(
-      expectedErrorMessage
-    );
+    expect(async () => {
+      await fetchFromCloudinary(publicId);
+    }).rejects.toThrowError(expectedErrorMessage);
   });
 });
 
@@ -210,8 +210,6 @@ describe('fetchFromCloudinary (network)', () => {
       expect(e.message).toContain('401');
       expect(e.message).toContain('Unauthorized');
     }
-
-    // await expect(fetchFromCloudinary(publicId)).rejects.toThrowError('aaa');
   });
 
   it('returns an image response with width,height,alt,caption (network)', async () => {
