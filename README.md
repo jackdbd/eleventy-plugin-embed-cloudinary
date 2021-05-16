@@ -6,6 +6,9 @@ Eleventy plugin to automatically embed in markdown files any image hosted on you
 
 Write a URL → get a [responsive image](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images).
 
+<!-- START doctoc -->
+<!-- END doctoc -->
+
 ## Installation
 
 Install with npm or yarn.
@@ -78,3 +81,5 @@ npm run release:patch
 npm run release:minor
 npm run release:major
 ```
+
+Package size checked with [BundleWatch](https://bundlewatch.io/#/).

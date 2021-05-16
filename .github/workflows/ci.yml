@@ -34,9 +34,3 @@ jobs:
         uses: coverallsapp/github-action@v1.1.2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Jest coverage report (only in PR)
-        if: ${{ github.event_name == 'pull_request' }}
-        uses: ArtiomTr/jest-coverage-report-action@v1.3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          test_script: npm run test --ci --coverage
