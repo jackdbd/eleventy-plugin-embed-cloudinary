@@ -13,8 +13,6 @@ cleanup_package_json() {
     jq ".scripts|=with_entries(select(.key|test(${REGEX})))" > package.json
 }
 
-# TODO: run size-limit? snyk?
-
 [ -f ${PACKAGE_JSON_BACKUP_FILE} ] && rm ${PACKAGE_JSON_BACKUP_FILE}
 
 # echo "Backup original package.json"

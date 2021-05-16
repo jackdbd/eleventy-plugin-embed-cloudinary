@@ -29,6 +29,7 @@
     "image"
   ],
   "scripts": {
+    "bundlewatch": "bundlewatch",
     "prebuild": "rm -rf dist",
     "build": "tsdx build --entry ./src/.eleventy.ts --target node && mv dist/index.js dist/.eleventy.js",
     "lint": "tsdx lint",
@@ -41,8 +42,6 @@
     "release:minor": "npm run release -- --increment minor",
     "release:major": "npm run release -- --increment major",
     "postrelease": "echo 'See package on npm' && chromium-browser https://www.npmjs.com/package/eleventy-plugin-embed-cloudinary",
-    "size": "size-limit",
-    "size:why": "size-limit --why",
     "start": "tsdx watch --entry ./src/.eleventy.ts --target node --verbose",
     "test": "tsdx test --detectOpenHandles --coverage=true --verbose",
     "test:config": "tsdx test --showConfig"
@@ -53,25 +52,33 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "size-limit": [
-    {
-      "path": "dist/eleventy-plugin-embed-cloudinary.cjs.production.min.js",
-      "limit": "50 B"
+  "bundlewatch": {
+    "ci": {
+      "repoBranchBase": "main",
+      "trackBranches": [
+        "main"
+      ]
     },
-    {
-      "path": "dist/eleventy-plugin-embed-cloudinary.esm.js",
-      "limit": "50 B"
-    }
-  ],
+    "defaultCompression": "gzip",
+    "files": [
+      {
+        "path": "dist/eleventy-plugin-embed-cloudinary.cjs.production.min.js",
+        "maxSize": "1.5kB"
+      },
+      {
+        "path": "dist/eleventy-plugin-embed-cloudinary.esm.js",
+        "maxSize": "2kB"
+      }
+    ]
+  },
   "dependencies": {
     "@11ty/eleventy-cache-assets": "^2.2.1"
   },
   "devDependencies": {
     "@11ty/eleventy": "^0.12.1",
-    "@size-limit/preset-small-lib": "^4.10.2",
     "auto-changelog": "^2.2.1",
+    "bundlewatch": "^0.3.2",
     "husky": "^6.0.0",
-    "size-limit": "^4.10.2",
     "tsdx": "^0.14.1",
     "tslib": "^2.2.0",
     "typescript": "^4.2.4",
