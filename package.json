@@ -12,6 +12,10 @@
     "type": "git",
     "url": "git+https://github.com/jackdbd/eleventy-plugin-embed-cloudinary.git"
   },
+  "homepage": "https://github.com/jackdbd/eleventy-plugin-embed-cloudinary#readme",
+  "bugs": {
+    "url": "https://github.com/jackdbd/eleventy-plugin-embed-cloudinary/issues"
+  },
   "main": "dist/.eleventy.js",
   "module": "dist/eleventy-plugin-embed-cloudinary.esm.js",
   "typings": "dist/.eleventy.d.ts",
@@ -32,6 +36,9 @@
     "bundlewatch": "bundlewatch",
     "prebuild": "rm -rf dist",
     "build": "tsdx build --entry ./src/.eleventy.ts --target node && mv dist/index.js dist/.eleventy.js",
+    "docs:ae": "npm run build && api-extractor run --local --verbose && api-documenter markdown -i .ae/doc -o docs-ae",
+    "docs:typedoc": "typedoc src/api-extractor.ts --out docs --theme default",
+    "docs": "npm run docs:ae && npm run docs:typedoc",
     "lint": "tsdx lint",
     "prepare": "husky install",
     "prepack": "npm run build && ./scripts/clean-package-json",
@@ -67,7 +74,7 @@
       },
       {
         "path": "dist/eleventy-plugin-embed-cloudinary.esm.js",
-        "maxSize": "2kB"
+        "maxSize": "3kB"
       }
     ]
   },
@@ -76,11 +83,14 @@
   },
   "devDependencies": {
     "@11ty/eleventy": "^0.12.1",
+    "@microsoft/api-documenter": "^7.13.8",
+    "@microsoft/api-extractor": "^7.15.1",
     "auto-changelog": "^2.2.1",
     "bundlewatch": "^0.3.2",
     "husky": "^6.0.0",
     "tsdx": "^0.14.1",
     "tslib": "^2.2.0",
+    "typedoc": "^0.20.36",
     "typescript": "^4.2.4",
     "xyz": "^4.0.0"
   }
