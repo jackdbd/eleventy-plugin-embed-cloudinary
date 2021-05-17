@@ -1,11 +1,23 @@
-// Fields required to authenticate with Cloudinary.
+/**
+ * Fields required to authenticate with Cloudinary.
+ *
+ * @public
+ * @remarks
+ * Used by {@link UserConfig}
+ */
 export interface CloudinaryAuthConfig {
   apiKey: string;
   apiSecret: string;
   cloudName: string;
 }
 
-// Optional fields to configure the Cloudinary client.
+/**
+ * Optional fields to configure the Cloudinary client.
+ *
+ * @public
+ * @remarks
+ * Used by {@link UserConfig}
+ */
 export interface CloudinaryClientOptions {
   shouldThrowOnMissingAlt?: boolean;
   shouldThrowOnMissingCaption?: boolean;
@@ -16,7 +28,13 @@ export const defaultCloudinaryClientConfig: Required<CloudinaryClientOptions> = 
   shouldThrowOnMissingCaption: false,
 };
 
-// All non-Cloudinary optional fields.
+/**
+ * All non-Cloudinary optional fields.
+ *
+ * @public
+ * @remarks
+ * Used by {@link UserConfig}
+ */
 export interface NonCloudinaryOptions {
   cacheDirectory?: string;
   cacheDuration?: string;
@@ -38,15 +56,23 @@ export const defaultPluginConfig = {
   ...defaultNonCloudinaryConfig,
 };
 
-// Configuration for any Cloudinary client. A Cloudinary client doesn't
-// necessarily cache HTTP requests.
 export type CloudinaryClientConfig = CloudinaryAuthConfig &
   CloudinaryClientOptions;
 
+/**
+ * Configuration for this plugin.
+ *
+ * @public
+ */
 export type UserConfig = CloudinaryAuthConfig &
   Partial<CloudinaryClientOptions> &
   Partial<NonCloudinaryOptions>;
 
+/**
+ * Complete plugin config with no missing fields.
+ *
+ * @internal
+ */
 export type PluginConfig = CloudinaryAuthConfig &
   CloudinaryClientOptions &
   NonCloudinaryOptions;

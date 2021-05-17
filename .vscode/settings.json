@@ -1,0 +1,6 @@
+{
+  // so VS code does not highlights JSON comments as errors (comments are useful
+  // in the configuration for API extractor).
+  // https://api-extractor.com/pages/setup/invoking/
+  "files.associations": { "*.json": "jsonc" }
+}

@@ -1,0 +1,553 @@
+{
+  "metadata": {
+    "toolPackage": "@microsoft/api-extractor",
+    "toolVersion": "7.15.1",
+    "schemaVersion": 1004,
+    "oldestForwardsCompatibleVersion": 1001,
+    "tsdocConfig": {
+      "$schema": "https://developer.microsoft.com/json-schemas/tsdoc/v0/tsdoc.schema.json",
+      "noStandardTags": true,
+      "tagDefinitions": [
+        {
+          "tagName": "@alpha",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@beta",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@defaultValue",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@decorator",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@deprecated",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@eventProperty",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@example",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@experimental",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@inheritDoc",
+          "syntaxKind": "inline"
+        },
+        {
+          "tagName": "@internal",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@label",
+          "syntaxKind": "inline"
+        },
+        {
+          "tagName": "@link",
+          "syntaxKind": "inline",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@override",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@packageDocumentation",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@param",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@privateRemarks",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@public",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@readonly",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@remarks",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@returns",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@sealed",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@see",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@throws",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@typeParam",
+          "syntaxKind": "block",
+          "allowMultiple": true
+        },
+        {
+          "tagName": "@virtual",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@betaDocumentation",
+          "syntaxKind": "modifier"
+        },
+        {
+          "tagName": "@internalRemarks",
+          "syntaxKind": "block"
+        },
+        {
+          "tagName": "@preapproved",
+          "syntaxKind": "modifier"
+        }
+      ],
+      "supportForTags": {
+        "@alpha": true,
+        "@beta": true,
+        "@defaultValue": true,
+        "@decorator": true,
+        "@deprecated": true,
+        "@eventProperty": true,
+        "@example": true,
+        "@experimental": true,
+        "@inheritDoc": true,
+        "@internal": true,
+        "@label": true,
+        "@link": true,
+        "@override": true,
+        "@packageDocumentation": true,
+        "@param": true,
+        "@privateRemarks": true,
+        "@public": true,
+        "@readonly": true,
+        "@remarks": true,
+        "@returns": true,
+        "@sealed": true,
+        "@see": true,
+        "@throws": true,
+        "@typeParam": true,
+        "@virtual": true,
+        "@betaDocumentation": true,
+        "@internalRemarks": true,
+        "@preapproved": true
+      }
+    }
+  },
+  "kind": "Package",
+  "canonicalReference": "eleventy-plugin-embed-cloudinary!",
+  "docComment": "/**\n * Eleventy plugin to automatically embed images hosted on Cloudinary.\n *\n * @example\n *\n * Here is the minimal configuration:\n * ```\n * const embedCloudinary = require('eleventy-plugin-embed-cloudinary');\n *\n * eleventyConfig.addPlugin(embedCloudinary, {\n *   apiKey: process.env.CLOUDINARY_API_KEY,\n *   apiSecret: process.env.CLOUDINARY_API_SECRET,\n *   cloudName: process.env.CLOUDINARY_CLOUD_NAME\n * });\n * ```\n *\n * @packageDocumentation\n */\n",
+  "name": "eleventy-plugin-embed-cloudinary",
+  "members": [
+    {
+      "kind": "EntryPoint",
+      "canonicalReference": "eleventy-plugin-embed-cloudinary!",
+      "name": "",
+      "members": [
+        {
+          "kind": "Interface",
+          "canonicalReference": "eleventy-plugin-embed-cloudinary!CloudinaryAuthConfig:interface",
+          "docComment": "/**\n * Fields required to authenticate with Cloudinary.\n *\n * @remarks\n *\n * Used by {@link UserConfig}\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface CloudinaryAuthConfig "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "CloudinaryAuthConfig",
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "eleventy-plugin-embed-cloudinary!CloudinaryAuthConfig#apiKey:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "apiKey: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "apiKey",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "eleventy-plugin-embed-cloudinary!CloudinaryAuthConfig#apiSecret:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "apiSecret: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "apiSecret",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "eleventy-plugin-embed-cloudinary!CloudinaryAuthConfig#cloudName:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "cloudName: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": false,
+              "releaseTag": "Public",
+              "name": "cloudName",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "eleventy-plugin-embed-cloudinary!CloudinaryClientOptions:interface",
+          "docComment": "/**\n * Optional fields to configure the Cloudinary client.\n *\n * @remarks\n *\n * Used by {@link UserConfig}\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface CloudinaryClientOptions "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "CloudinaryClientOptions",
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "eleventy-plugin-embed-cloudinary!CloudinaryClientOptions#shouldThrowOnMissingAlt:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "shouldThrowOnMissingAlt?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "shouldThrowOnMissingAlt",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "eleventy-plugin-embed-cloudinary!CloudinaryClientOptions#shouldThrowOnMissingCaption:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "shouldThrowOnMissingCaption?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "shouldThrowOnMissingCaption",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "Variable",
+          "canonicalReference": "eleventy-plugin-embed-cloudinary!configFunction:var",
+          "docComment": "/**\n * Configure the plugin to work with your eleventy configuration.\n *\n * @remarks\n *\n * This is the function exported by this plugin.\n *\n * @param eleventyConfig - Configuration for eleventy.\n *\n * @param userConfig - Configuration for this plugin.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "configFunction: "
+            },
+            {
+              "kind": "Content",
+              "text": "(eleventyConfig: any, userConfig: "
+            },
+            {
+              "kind": "Reference",
+              "text": "UserConfig",
+              "canonicalReference": "eleventy-plugin-embed-cloudinary!UserConfig:type"
+            },
+            {
+              "kind": "Content",
+              "text": ") => void"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "configFunction",
+          "variableTypeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 4
+          }
+        },
+        {
+          "kind": "Interface",
+          "canonicalReference": "eleventy-plugin-embed-cloudinary!NonCloudinaryOptions:interface",
+          "docComment": "/**\n * All non-Cloudinary optional fields.\n *\n * @remarks\n *\n * Used by {@link UserConfig}\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export interface NonCloudinaryOptions "
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "NonCloudinaryOptions",
+          "members": [
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "eleventy-plugin-embed-cloudinary!NonCloudinaryOptions#cacheDirectory:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "cacheDirectory?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "cacheDirectory",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "eleventy-plugin-embed-cloudinary!NonCloudinaryOptions#cacheDuration:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "cacheDuration?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "cacheDuration",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "eleventy-plugin-embed-cloudinary!NonCloudinaryOptions#classString:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "classString?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "string"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "classString",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            },
+            {
+              "kind": "PropertySignature",
+              "canonicalReference": "eleventy-plugin-embed-cloudinary!NonCloudinaryOptions#shouldLazyLoad:member",
+              "docComment": "",
+              "excerptTokens": [
+                {
+                  "kind": "Content",
+                  "text": "shouldLazyLoad?: "
+                },
+                {
+                  "kind": "Content",
+                  "text": "boolean"
+                },
+                {
+                  "kind": "Content",
+                  "text": ";"
+                }
+              ],
+              "isOptional": true,
+              "releaseTag": "Public",
+              "name": "shouldLazyLoad",
+              "propertyTypeTokenRange": {
+                "startIndex": 1,
+                "endIndex": 2
+              }
+            }
+          ],
+          "extendsTokenRanges": []
+        },
+        {
+          "kind": "TypeAlias",
+          "canonicalReference": "eleventy-plugin-embed-cloudinary!UserConfig:type",
+          "docComment": "/**\n * Configuration for this plugin.\n *\n * @public\n */\n",
+          "excerptTokens": [
+            {
+              "kind": "Content",
+              "text": "export declare type UserConfig = "
+            },
+            {
+              "kind": "Reference",
+              "text": "CloudinaryAuthConfig",
+              "canonicalReference": "eleventy-plugin-embed-cloudinary!CloudinaryAuthConfig:interface"
+            },
+            {
+              "kind": "Content",
+              "text": " & "
+            },
+            {
+              "kind": "Reference",
+              "text": "Partial",
+              "canonicalReference": "!Partial:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "CloudinaryClientOptions",
+              "canonicalReference": "eleventy-plugin-embed-cloudinary!CloudinaryClientOptions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": "> & "
+            },
+            {
+              "kind": "Reference",
+              "text": "Partial",
+              "canonicalReference": "!Partial:type"
+            },
+            {
+              "kind": "Content",
+              "text": "<"
+            },
+            {
+              "kind": "Reference",
+              "text": "NonCloudinaryOptions",
+              "canonicalReference": "eleventy-plugin-embed-cloudinary!NonCloudinaryOptions:interface"
+            },
+            {
+              "kind": "Content",
+              "text": ">"
+            },
+            {
+              "kind": "Content",
+              "text": ";"
+            }
+          ],
+          "releaseTag": "Public",
+          "name": "UserConfig",
+          "typeTokenRange": {
+            "startIndex": 1,
+            "endIndex": 11
+          }
+        }
+      ]
+    }
+  ]
+}
