@@ -8,28 +8,22 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
-      - name: Dump context
-        env:
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
-        run: echo "GH CONTEXT $GITHUB_CONTEXT"
-      - name: Dump job
-        env:
-          JOB_CONTEXT: ${{ toJSON(job) }}
-        run: echo "GH JOB $JOB_CONTEXT"
-      - name: Dump steps
-        env:
-          STEPS_CONTEXT: ${{ toJSON(steps) }}
-        run: echo "GH STEPS $STEPS_CONTEXT"
       - name: Send success message to Telegram
         uses: appleboy/telegram-action@master
         env:
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
-          STEPS_CONTEXT: ${{ toJSON(steps) }}
+          REPO_NAME: ${{ github.event.repository.full_name }}
+          REPO_URL: ${{ toJSON(github.event.repository.html_url) }}
+          WORKFLOW_URL: ${{ github.event.workflow_run.html_url }}
+          CREATED_AT: ${{ github.event.workflow_run.created_at }}
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            "The CI workflow was successful $GITHUB_CONTEXT".
+            ${{ github.event.repository.full_name }} and ${{ REPO_NAME }} or $REPO_NAME $REPO_NAME.
+            echo This event is a pull request that had an assignee removed.
+            ${{ github.event.repository.html_url }} and ${{ REPO_URL }} or $REPO_URL .
+            Workflow run URL ${{ github.event.workflow_run.html_url }}
+            Workflow run created at: ${{ github.event.workflow_run.created_at }}
   on-failure:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'failure' }}
