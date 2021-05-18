@@ -7,7 +7,7 @@ on:
     branches:
       - main
 jobs:
-  ci:
+  build-and-test:
     name: CI on ${{ matrix.os }}, Node ${{ matrix.node }}
     runs-on: ${{ matrix.os }}
     strategy:
@@ -31,8 +31,29 @@ jobs:
       - name: Build
         run: npm run build
       - name: Test
+        run: npm run test --ci --maxWorkers=2
+  coverage:
+    name: Test coverage
+    runs-on: ubuntu-latest
+    env:
+      CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
+      CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
+      CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
+      CLOUDINARY_IMAGE_PUBLIC_ID: ${{ secrets.CLOUDINARY_IMAGE_PUBLIC_ID }}
+      NODE_VERSION: 12.x
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Use Node ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Install dependencies
+        run: rm package-lock.json && npm install
+      - name: Test
         run: npm run test --ci --coverage --maxWorkers=2
       - name: Upload coverage report to Coveralls
+        # https://github.com/coverallsapp/github-action
         uses: coverallsapp/github-action@v1.1.2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
