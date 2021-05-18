@@ -1,0 +1,43 @@
+name: "Notify when CI workflow fails"
+on:
+  workflow_run:
+    workflows: ["CI"]
+    types: [completed]
+jobs:
+  on-success:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Dump context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "GH CONTEXT $GITHUB_CONTEXT"
+      - name: Dump job
+        env:
+          JOB_CONTEXT: ${{ toJSON(job) }}
+        run: echo "GH JOB $JOB_CONTEXT"
+      - name: Dump steps
+        env:
+          STEPS_CONTEXT: ${{ toJSON(steps) }}
+        run: echo "GH STEPS $STEPS_CONTEXT"
+      - name: Send success message to Telegram
+        uses: appleboy/telegram-action@master
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+          STEPS_CONTEXT: ${{ toJSON(steps) }}
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            "The CI workflow was successful $GITHUB_CONTEXT".
+  on-failure:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    steps:
+      - name: Send custom message to Telegram with args
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            The CI workflow failed.
