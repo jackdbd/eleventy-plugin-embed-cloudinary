@@ -23,16 +23,6 @@ jobs:
         env:
           BUNDLEWATCH_GITHUB_TOKEN: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
         run: npm run bundlewatch
-      - name: Log some variables
-        run: echo "ACTOR=${{ github.actor }} BASE_REF=${{ github.base_ref }} REPO_OWNER=${{ github.repository_owne }} SHA=${{ github.sha }}"
-      - name: Dump runner context
-        env:
-          RUNNER_CONTEXT: ${{ toJSON(runner) }}
-        run: echo "$RUNNER_CONTEXT"
-      - name: Check file sizes with size-limit
-        uses: andresz1/size-limit-action@v1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Send custom message to Telegram with args
         uses: andresz1/size-limit-action@v1
         with:
