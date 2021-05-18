@@ -36,3 +36,19 @@ jobs:
         uses: coverallsapp/github-action@v1.1.2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Notify Telegram if job was cancelled
+        if: ${{ cancelled() }}
+        uses: appleboy/telegram-action@master
+        env:
+          REPO_URL: ${{ github.event.repository.html_url }}
+          WORKFLOW_RUN_URL: ${{ github.event.workflow_run.html_url }}
+          WORKFLOW_RUN_CREATED_AT: ${{ github.event.workflow_run.created_at }}
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          # https://emojipedia.org/
+          message: |
+            🛑 ❌ Repo: ${{ env.REPO_URL }}. ✖️ 💬
+            Workflow run: ${{ env.WORKFLOW_RUN_URL }}
+            Workflow run created at: ${{ env.WORKFLOW_RUN_CREATED_AT }}
+
