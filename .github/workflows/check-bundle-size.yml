@@ -1,15 +1,13 @@
 name: "Check bundle size"
-on: [pull_request]
+on: [workflow_dispatch, pull_request]
 jobs:
-  bundlewatch:
-    name: BundleWatch on ${{ matrix.os }}, Node ${{ matrix.node }}
+  setup-project:
+    name: Setup project on ${{ matrix.os }}, Node ${{ matrix.node }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-latest]
         node: ['10.x', '12.x']
-    env:
-      BUNDLEWATCH_GITHUB_TOKEN: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
@@ -21,5 +19,11 @@ jobs:
         run: rm package-lock.json && npm install
       - name: Build
         run: npm run build
+  check-bundle-size:
+    name: Check bundle sizes with BundleWatch
+    needs: [setup-project]
+    env:
+      BUNDLEWATCH_GITHUB_TOKEN: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
+    steps:
       - name: Check file sizes with BundleWatch
         run: npm run bundlewatch
