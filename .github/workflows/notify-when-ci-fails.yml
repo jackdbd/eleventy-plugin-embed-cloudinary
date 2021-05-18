@@ -7,31 +7,39 @@ jobs:
   on-success:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    env:
+      REPO_NAME: ${{ github.event.repository.full_name }}
+      REPO_URL: ${{ github.event.repository.html_url }}
+      WORKFLOW_RUN_URL: ${{ github.event.workflow_run.html_url }}
+      WORKFLOW_RUN_CREATED_AT: ${{ github.event.workflow_run.created_at }}
     steps:
       - name: Send success message to Telegram
         uses: appleboy/telegram-action@master
-        env:
-          REPO_NAME: ${{ github.event.repository.full_name }}
-          REPO_URL: ${{ toJSON(github.event.repository.html_url) }}
-          WORKFLOW_URL: ${{ github.event.workflow_run.html_url }}
-          CREATED_AT: ${{ github.event.workflow_run.created_at }}
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
+          # https://emojipedia.org/
           message: |
-            ${{ github.event.repository.full_name }} and ${{ env.REPO_NAME }} or $REPO_NAME "$REPO_NAME".
-            echo This event is a pull request that had an assignee removed.
-            ${{ github.event.repository.html_url }} and ${{ toJSON(github.event.repository.html_url) }}.
-            Workflow run URL ${{ github.event.workflow_run.html_url }}
-            Workflow run created at: ${{ github.event.workflow_run.created_at }}
+            ⚠️ SUCCESS CI WORKFLOW! u'\U0001F4A8' 😭 😢
+            Repo: ${{ env.REPO_URL }}.
+            Workflow run: ${{ env.WORKFLOW_RUN_URL }}
+            Workflow run created at: ${{ env.WORKFLOW_RUN_CREATED_AT }}
   on-failure:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    env:
+      REPO_NAME: ${{ github.event.repository.full_name }}
+      REPO_URL: ${{ github.event.repository.html_url }}
+      WORKFLOW_RUN_URL: ${{ github.event.workflow_run.html_url }}
+      WORKFLOW_RUN_CREATED_AT: ${{ github.event.workflow_run.created_at }}
     steps:
-      - name: Send custom message to Telegram with args
+      - name: Notify Telegram of failed CI run
         uses: appleboy/telegram-action@master
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            The CI workflow failed.
+            ⚠️ FAILED CI WORKFLOW!
+            Repo: ${{ env.REPO_URL }}.
+            Workflow run: ${{ env.WORKFLOW_RUN_URL }}
+            Workflow run created at: ${{ env.WORKFLOW_RUN_CREATED_AT }}
