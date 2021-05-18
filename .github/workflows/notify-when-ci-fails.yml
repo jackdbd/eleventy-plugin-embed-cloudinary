@@ -19,9 +19,9 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            ${{ github.event.repository.full_name }} and ${{ REPO_NAME }} or $REPO_NAME $REPO_NAME.
+            ${{ github.event.repository.full_name }} and ${{ env.REPO_NAME }} or $REPO_NAME "$REPO_NAME".
             echo This event is a pull request that had an assignee removed.
-            ${{ github.event.repository.html_url }} and ${{ REPO_URL }} or $REPO_URL .
+            ${{ github.event.repository.html_url }} and ${{ toJSON(github.event.repository.html_url) }}.
             Workflow run URL ${{ github.event.workflow_run.html_url }}
             Workflow run created at: ${{ github.event.workflow_run.created_at }}
   on-failure:
