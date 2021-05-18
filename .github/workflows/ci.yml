@@ -1,52 +1,74 @@
 name: CI
+
 on:
+  pull_request:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
+
 jobs:
-  ci:
-    name: CI on ${{ matrix.os }}, Node ${{ matrix.node }}
+  build:
+    name: Build on ${{ matrix.os }}, Node.js ${{ matrix.node }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macOS-latest]
-        node: ['10.x','12.x', '14.x']
+        node: ['12.x', '14.x', '16.x']
     env:
       CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
       CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
       CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
       CLOUDINARY_IMAGE_PUBLIC_ID: ${{ secrets.CLOUDINARY_IMAGE_PUBLIC_ID }}
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
-      - name: Use Node ${{ matrix.node }}
-        uses: actions/setup-node@v1
+      - name: 🛎️ Checkout repo
+        uses: actions/checkout@v3
+      - name: ⚙️ Setup Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
-      - name: Install dependencies
-        run: rm package-lock.json && npm install
-      - name: Build
+      - name: ⚙️ Install dependencies
+        run: npm run ci
+      - name: 🔧 Build package
         run: npm run build
-      - name: Test
+  test-and-upload-test-coverage:
+    name: Test on ${{ matrix.os }}, Node.js ${{ matrix.node }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+        node: ['12.x', '14.x', '16.x']
+    env:
+      CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
+      CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
+      CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
+      CLOUDINARY_IMAGE_PUBLIC_ID: ${{ secrets.CLOUDINARY_IMAGE_PUBLIC_ID }}
+    steps:
+      - name: 🛎️ Checkout repo
+        uses: actions/checkout@v3
+      - name: ⚙️ Setup Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+      - name: ⚙️ Install dependencies
+        run: npm ci
+      - name: 🔍 Test package
         run: npm run test --ci --coverage --maxWorkers=2
       - name: Upload coverage report to Coveralls
-        uses: coverallsapp/github-action@v1.1.2
+        # https://github.com/coverallsapp/github-action
+        uses: coverallsapp/github-action@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
   sonarcloud:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout repo
-      uses: actions/checkout@v2
-      with:
-        # Disabling shallow clone is recommended for improving relevancy of reporting
-        fetch-depth: 0
-    - name: SonarCloud Scan
-      # https://github.com/sonarsource/sonarcloud-github-action
-      uses: sonarsource/sonarcloud-github-action@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: 🛎️ Checkout repo
+        uses: actions/checkout@v3
+        with:
+          # Disabling shallow clone is recommended for improving relevancy of reporting
+          fetch-depth: 0
+      - name: 🛃 SonarCloud Scan
+        # https://github.com/sonarsource/sonarcloud-github-action
+        uses: sonarsource/sonarcloud-github-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

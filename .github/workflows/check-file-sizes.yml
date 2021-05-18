@@ -1,25 +1,36 @@
 name: 'Check file sizes'
-on: [workflow_dispatch, pull_request]
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
 jobs:
   check-file-sizes:
-    name: Check file sizes on ${{ matrix.os }}, Node ${{ matrix.node }}
+    name: Check file sizes on ${{ matrix.os }}, Node.js ${{ matrix.node }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node: ['10.x', '12.x']
+        node: ['12.x', '14.x', '16.x']
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
-      - name: Use Node ${{ matrix.node }}
-        uses: actions/setup-node@v1
+      - name: 🛎️ Checkout repo
+        uses: actions/checkout@v3
+      - name: ⚙️ Setup Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
-      - name: Install dependencies
-        run: rm package-lock.json && npm install
-      - name: Build
+      - name: ⚙️ Install dependencies
+        run: npm ci
+      - name: 🔧 Build package
         run: npm run build
-      - name: Check file sizes with BundleWatch
+      - name: 📦 Package size report
+        # https://github.com/marketplace/actions/pkg-size-action
+        uses: pkg-size/action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: 📦 Check file sizes with BundleWatch
         env:
           BUNDLEWATCH_GITHUB_TOKEN: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
         run: npm run bundlewatch

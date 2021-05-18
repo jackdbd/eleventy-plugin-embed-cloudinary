@@ -18,7 +18,6 @@ eleventyConfig.addPlugin(embedCloudinary, {
   apiSecret: process.env.CLOUDINARY_API_SECRET,
   cloudName: process.env.CLOUDINARY_CLOUD_NAME
 });
-
 ```
 
 ## Interfaces

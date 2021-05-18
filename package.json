@@ -5,14 +5,24 @@
   "version": "1.0.1",
   "author": {
     "name": "Giacomo Debidda",
-    "email": "jackdebidda@gmail.com",
+    "email": "giacomo@giacomodebidda.com",
     "url": "https://giacomodebidda.com/"
+  },
+  "homepage": "https://github.com/jackdbd/eleventy-plugin-embed-cloudinary#readme",
+  "keywords": [
+    "11ty",
+    "cloudinary",
+    "eleventy",
+    "eleventy-plugin",
+    "image"
+  ],
+  "engines": {
+    "node": ">=10.0.0"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jackdbd/eleventy-plugin-embed-cloudinary.git"
+    "url": "https://github.com/jackdbd/eleventy-plugin-embed-cloudinary"
   },
-  "homepage": "https://github.com/jackdbd/eleventy-plugin-embed-cloudinary#readme",
   "bugs": {
     "url": "https://github.com/jackdbd/eleventy-plugin-embed-cloudinary/issues"
   },
@@ -22,27 +32,22 @@
   "files": [
     "dist"
   ],
-  "engines": {
-    "node": ">=10"
-  },
-  "keywords": [
-    "11ty",
-    "cloudinary",
-    "eleventy",
-    "eleventy-plugin",
-    "image"
-  ],
   "scripts": {
-    "bundlewatch": "bundlewatch",
-    "prebuild": "rm -rf dist",
+    "prebuild": "npm run clean",
     "build": "tsdx build --entry ./src/.eleventy.ts --target node && mv dist/index.js dist/.eleventy.js",
-    "docs:ae": "npm run build && api-extractor run --local --verbose && api-documenter markdown -i .ae/doc -o docs-ae",
+    "clean": "rm -rf dist",
+    "doctoc": "doctoc --github README.md --title '<details><summary>Table of Contents</summary>'",
+    "bundlewatch": "bundlewatch --config ./config/bundlewatch.js",
+    "docs:ae": "api-extractor run --config ./api-extractor.json --local --verbose",
+    "docs:ad": "api-documenter markdown --input-folder .ae/doc --output-folder docs-ae",
     "docs:typedoc": "typedoc src/api-extractor.ts --out docs --theme default",
-    "docs": "npm run docs:ae && npm run docs:typedoc",
+    "docs": "run-s 'docs:ae' 'docs:ad' 'docs:typedoc' --print-label",
     "lint": "tsdx lint",
+    "nuke": "npm run clean && rm -rf node_modules package-lock.json",
     "prepare": "husky install",
     "prepack": "npm run build && ./scripts/clean-package-json",
     "postpack": "./scripts/restore-package-json && ./scripts/create-github-release",
+    "precommit": "run-s 'lint' 'doctoc'",
     "prerelease": "echo PRELEASE",
     "release": "xyz --branch main --publish-command 'npm publish' --script './scripts/update-changelog'",
     "release:patch": "npm run release -- --increment patch",
@@ -53,45 +58,23 @@
     "test": "tsdx test --detectOpenHandles --coverage=true --verbose",
     "test:config": "tsdx test --showConfig"
   },
-  "prettier": {
-    "printWidth": 80,
-    "semi": true,
-    "singleQuote": true,
-    "trailingComma": "es5"
-  },
-  "bundlewatch": {
-    "ci": {
-      "repoBranchBase": "main",
-      "trackBranches": [
-        "main"
-      ]
-    },
-    "defaultCompression": "gzip",
-    "files": [
-      {
-        "path": "dist/eleventy-plugin-embed-cloudinary.cjs.production.min.js",
-        "maxSize": "1.5kB"
-      },
-      {
-        "path": "dist/eleventy-plugin-embed-cloudinary.esm.js",
-        "maxSize": "3kB"
-      }
-    ]
-  },
-  "dependencies": {
-    "@11ty/eleventy-cache-assets": "^2.2.1"
+  "dependencies": {},
+  "peerDependencies": {
+    "@11ty/eleventy": ">=1.0.0",
+    "@11ty/eleventy-cache-assets": ">=2.0.0"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^0.12.1",
-    "@microsoft/api-documenter": "^7.13.8",
-    "@microsoft/api-extractor": "^7.15.1",
+    "@microsoft/api-documenter": "7.17.17",
+    "@microsoft/api-extractor": "7.25.0",
     "auto-changelog": "^2.2.1",
-    "bundlewatch": "^0.3.2",
-    "husky": "^6.0.0",
-    "tsdx": "^0.14.1",
-    "tslib": "^2.2.0",
-    "typedoc": "^0.20.36",
-    "typescript": "^4.2.4",
-    "xyz": "^4.0.0"
+    "bundlewatch": "0.3.3",
+    "doctoc": "2.2.0",
+    "husky": "8.0.1",
+    "npm-run-all": "4.1.5",
+    "tsdx": "0.14.1",
+    "tslib": "^2.4.0",
+    "typedoc": "^0.22.17",
+    "typescript": "4.7.3",
+    "xyz": "4.0.0"
   }
 }
