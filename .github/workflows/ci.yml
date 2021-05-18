@@ -36,8 +36,8 @@ jobs:
         uses: coverallsapp/github-action@v1.1.2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Notify Telegram if job was cancelled
-        if: ${{ cancelled() }}
+      - name: Notify Telegram if job was successful
+        if: ${{ success() }}
         uses: appleboy/telegram-action@master
         env:
           REPO_URL: ${{ github.event.repository.html_url }}
