@@ -8,8 +8,6 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         node: ['10.x', '12.x']
-    env:
-      BUNDLEWATCH_GITHUB_TOKEN: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
@@ -22,4 +20,25 @@ jobs:
       - name: Build
         run: npm run build
       - name: Check file sizes with BundleWatch
+        env:
+          BUNDLEWATCH_GITHUB_TOKEN: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
         run: npm run bundlewatch
+      - name: Log some variables
+        run: echo "ACTOR=${{ github.actor }} BASE_REF=${{ github.base_ref }} REPO_OWNER=${{ github.repository_owne }} SHA=${{ github.sha }}"
+      - name: Dump runner context
+        env:
+          RUNNER_CONTEXT: ${{ toJSON(runner) }}
+        run: echo "$RUNNER_CONTEXT"
+      - name: Check file sizes with size-limit
+        uses: andresz1/size-limit-action@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Send custom message to Telegram with args
+        uses: andresz1/size-limit-action@v1
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          location: '24.9163213 121.1424972'
+          venue: '35.661777 139.704051 竹北體育館 新竹縣竹北市'
+          message: |
+            The ${{ github.event_name }} event triggered final step.
