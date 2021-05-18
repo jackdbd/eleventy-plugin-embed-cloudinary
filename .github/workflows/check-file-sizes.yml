@@ -1,4 +1,4 @@
-name: "Check file sizes"
+name: 'Check file sizes'
 on: [workflow_dispatch, pull_request]
 jobs:
   check-file-sizes:
@@ -23,12 +23,3 @@ jobs:
         env:
           BUNDLEWATCH_GITHUB_TOKEN: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
         run: npm run bundlewatch
-      - name: Send custom message to Telegram with args
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          location: '24.9163213 121.1424972'
-          venue: '35.661777 139.704051 竹北體育館 新竹縣竹北市'
-          message: |
-            The ${{ github.event_name }} event triggered final step.
