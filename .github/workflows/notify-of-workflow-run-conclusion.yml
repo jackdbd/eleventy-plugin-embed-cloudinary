@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'failure' }}
     steps:
-      - name: 'debug event.repository'
-        run: echo "github.event.workflow_run ${{ github.event.repository }}"
-      - name: 'debug event.workflow_run'
-        run: echo "github.event.workflow_run ${{ github.event.workflow_run }}"
+      - name: Dump github.event.repository
+        run: echo '${{ toJSON(github.event.repository) }}'
+      - name: Dump github.event.workflow_run
+        run: echo '${{ toJSON(github.event.workflow_run) }}'
       - name: 💬 Notify Telegram of workflow run FAILURE
         # https://github.com/appleboy/telegram-action
         uses: appleboy/telegram-action@v0.1.1
@@ -37,10 +37,10 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
-      - name: 'debug event.repository'
-        run: echo "github.event.workflow_run ${{ github.event.repository }}"
-      - name: 'debug event.workflow_run'
-        run: echo "github.event.workflow_run ${{ github.event.workflow_run }}"
+      - name: Dump github.event
+        run: echo '${{ toJSON(github.event) }}'
+      - name: Dump github.event.workflow_run
+        run: echo '${{ toJSON(github.event.workflow_run) }}'
       - name: 💬 Notify Telegram of workflow run SUCCESS
         uses: appleboy/telegram-action@v0.1.1
         with:
