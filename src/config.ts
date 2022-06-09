@@ -6,9 +6,9 @@
  * Used by {@link UserConfig}
  */
 export interface CloudinaryAuthConfig {
-  apiKey: string;
-  apiSecret: string;
-  cloudName: string;
+  apiKey: string
+  apiSecret: string
+  cloudName: string
 }
 
 /**
@@ -19,14 +19,14 @@ export interface CloudinaryAuthConfig {
  * Used by {@link UserConfig}
  */
 export interface CloudinaryClientOptions {
-  shouldThrowOnMissingAlt?: boolean;
-  shouldThrowOnMissingCaption?: boolean;
+  shouldThrowOnMissingAlt?: boolean
+  shouldThrowOnMissingCaption?: boolean
 }
 
 export const defaultCloudinaryClientConfig: Required<CloudinaryClientOptions> = {
   shouldThrowOnMissingAlt: false,
-  shouldThrowOnMissingCaption: false,
-};
+  shouldThrowOnMissingCaption: false
+}
 
 /**
  * All non-Cloudinary optional fields.
@@ -36,28 +36,28 @@ export const defaultCloudinaryClientConfig: Required<CloudinaryClientOptions> = 
  * Used by {@link UserConfig}
  */
 export interface NonCloudinaryOptions {
-  cacheDirectory?: string;
-  cacheDuration?: string;
-  classString?: string;
-  shouldLazyLoad?: boolean;
+  cacheDirectory?: string
+  cacheDuration?: string
+  classString?: string
+  shouldLazyLoad?: boolean
 }
 
 export const defaultNonCloudinaryConfig: Required<NonCloudinaryOptions> = {
   cacheDirectory: '.cache',
   cacheDuration: '30m',
   classString: '',
-  shouldLazyLoad: true,
-};
+  shouldLazyLoad: true
+}
 
-export type PluginOptions = CloudinaryClientOptions & NonCloudinaryOptions;
+export type PluginOptions = CloudinaryClientOptions & NonCloudinaryOptions
 
 export const defaultPluginConfig = {
   ...defaultCloudinaryClientConfig,
-  ...defaultNonCloudinaryConfig,
-};
+  ...defaultNonCloudinaryConfig
+}
 
 export type CloudinaryClientConfig = CloudinaryAuthConfig &
-  CloudinaryClientOptions;
+  CloudinaryClientOptions
 
 /**
  * Configuration for this plugin.
@@ -66,7 +66,7 @@ export type CloudinaryClientConfig = CloudinaryAuthConfig &
  */
 export type UserConfig = CloudinaryAuthConfig &
   Partial<CloudinaryClientOptions> &
-  Partial<NonCloudinaryOptions>;
+  Partial<NonCloudinaryOptions>
 
 /**
  * Complete plugin config with no missing fields.
@@ -75,4 +75,4 @@ export type UserConfig = CloudinaryAuthConfig &
  */
 export type PluginConfig = CloudinaryAuthConfig &
   CloudinaryClientOptions &
-  NonCloudinaryOptions;
+  NonCloudinaryOptions

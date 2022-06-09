@@ -1,12 +1,13 @@
 import {
   FetchImplementation,
   makeAPIClient,
-  makeGenericAPIClient,
-} from '../src/cloudinary-api-client';
-import { CloudinaryClientConfig } from '../src/config';
-import { messageImageHasNoAlt, messageImageHasNoCaption } from '../src/errors';
+  makeGenericAPIClient
+} from '../src/cloudinary-api-client'
+import { CloudinaryClientConfig } from '../src/config'
+import { messageImageHasNoAlt, messageImageHasNoCaption } from '../src/errors'
 
-const CAPTION_FRESH_RESPONSE = 'This is a FRESH response';
+const CAPTION_FRESH_RESPONSE = 'This is a FRESH response'
+
 const freshResponse = {
   resources: [
     {
@@ -16,13 +17,14 @@ const freshResponse = {
       context: {
         alt: 'mock alt text',
         caption: CAPTION_FRESH_RESPONSE,
-        description: 'mock description',
-      },
-    },
-  ],
-};
+        description: 'mock description'
+      }
+    }
+  ]
+}
 
-const CAPTION_CACHED_RESPONSE = 'This is a CACHED response';
+const CAPTION_CACHED_RESPONSE = 'This is a CACHED response'
+
 const cachedResponse = {
   resources: [
     {
@@ -32,13 +34,14 @@ const cachedResponse = {
       context: {
         alt: 'mock alt text',
         caption: CAPTION_CACHED_RESPONSE,
-        description: 'mock description',
-      },
-    },
-  ],
-};
+        description: 'mock description'
+      }
+    }
+  ]
+}
 
-const PUBLIC_ID_MISSING_ALT = 'mock_cloudinary_public_id_no_alt';
+const PUBLIC_ID_MISSING_ALT = 'mock_cloudinary_public_id_no_alt'
+
 const imageResponseWithMissingAlt = {
   resources: [
     {
@@ -47,13 +50,14 @@ const imageResponseWithMissingAlt = {
       public_id: PUBLIC_ID_MISSING_ALT,
       context: {
         caption: 'mock caption',
-        description: 'mock description',
-      },
-    },
-  ],
-};
+        description: 'mock description'
+      }
+    }
+  ]
+}
 
-const PUBLIC_ID_MISSING_CAPTION = 'mock_cloudinary_public_id_no_caption';
+const PUBLIC_ID_MISSING_CAPTION = 'mock_cloudinary_public_id_no_caption'
+
 const imageResponseWithMissingCaption = {
   resources: [
     {
@@ -62,176 +66,178 @@ const imageResponseWithMissingCaption = {
       public_id: PUBLIC_ID_MISSING_CAPTION,
       context: {
         alt: 'mock alt text',
-        description: 'mock description',
-      },
-    },
-  ],
-};
+        description: 'mock description'
+      }
+    }
+  ]
+}
 
 // true means that the corresponding image attribute is missing
 interface MissingImageAttr {
-  alt?: boolean;
-  caption?: boolean;
+  alt?: boolean
+  caption?: boolean
 }
 
 const makeMockFetchWithMissingImageAttr = (
   missingImageFields: MissingImageAttr
 ) => {
-  const fetchImplementation: FetchImplementation = _url => {
-    return new Promise(resolve => {
+  const fetchImplementation: FetchImplementation = (_url) => {
+    return new Promise((resolve) => {
       process.nextTick(() => {
         if (missingImageFields.alt) {
-          resolve(imageResponseWithMissingAlt);
+          resolve(imageResponseWithMissingAlt)
         } else if (missingImageFields.caption) {
-          resolve(imageResponseWithMissingCaption);
+          resolve(imageResponseWithMissingCaption)
         } else {
-          resolve(freshResponse);
+          resolve(freshResponse)
         }
-      });
-    });
-  };
-  return fetchImplementation;
-};
+      })
+    })
+  }
+  return fetchImplementation
+}
 
 const accountConfigValid: CloudinaryClientConfig = {
   apiKey: process.env.CLOUDINARY_API_KEY as string,
   apiSecret: process.env.CLOUDINARY_API_SECRET as string,
-  cloudName: process.env.CLOUDINARY_CLOUD_NAME as string,
-};
+  cloudName: process.env.CLOUDINARY_CLOUD_NAME as string
+}
 
 const makeMockFetchWithCache = () => {
-  const cache = new Map<string, boolean>();
-  const fetchImplementation: FetchImplementation = url => {
-    return new Promise(resolve => {
+  const cache = new Map<string, boolean>()
+  const fetchImplementation: FetchImplementation = (url) => {
+    return new Promise((resolve) => {
       process.nextTick(() => {
-        const seen = cache.get(url);
+        const seen = cache.get(url)
         if (seen) {
-          resolve(cachedResponse);
+          resolve(cachedResponse)
         } else {
-          cache.set(url, true);
-          resolve(freshResponse);
+          cache.set(url, true)
+          resolve(freshResponse)
         }
-      });
-    });
-  };
-  return fetchImplementation;
-};
+      })
+    })
+  }
+  return fetchImplementation
+}
 
 describe('fetchFromCloudinary (mock)', () => {
   it('returns the expected response (mock)', async () => {
     const fetchFromCloudinary = makeGenericAPIClient(
       accountConfigValid,
       makeMockFetchWithCache()
-    );
-    const publicId = process.env.CLOUDINARY_IMAGE_PUBLIC_ID as string;
+    )
+    const publicId = process.env.CLOUDINARY_IMAGE_PUBLIC_ID as string
 
-    const result = await fetchFromCloudinary(publicId);
+    const result = await fetchFromCloudinary(publicId)
 
-    expect(result).toHaveProperty('width');
-    expect(result).toHaveProperty('height');
-    expect(result).toHaveProperty('alt');
-    expect(result).toHaveProperty('caption');
-  });
+    expect(result).toHaveProperty('width')
+    expect(result).toHaveProperty('height')
+    expect(result).toHaveProperty('alt')
+    expect(result).toHaveProperty('caption')
+  })
 
   it('returns a cached response (mock)', async () => {
     const fetchFromCloudinary = makeGenericAPIClient(
       accountConfigValid,
       makeMockFetchWithCache(),
       { someFetchOption: 'foo' }
-    );
-    const publicId = process.env.CLOUDINARY_IMAGE_PUBLIC_ID as string;
+    )
+    const publicId = process.env.CLOUDINARY_IMAGE_PUBLIC_ID as string
 
-    const fresh = await fetchFromCloudinary(publicId);
-    expect(fresh.caption).toBe(CAPTION_FRESH_RESPONSE);
+    const fresh = await fetchFromCloudinary(publicId)
+    expect(fresh.caption).toBe(CAPTION_FRESH_RESPONSE)
 
-    const cached = await fetchFromCloudinary(publicId);
-    expect(cached.caption).toBe(CAPTION_CACHED_RESPONSE);
-  });
+    const cached = await fetchFromCloudinary(publicId)
+    expect(cached.caption).toBe(CAPTION_CACHED_RESPONSE)
+  })
 
   it('throws with the expected error message when the image `alt` is missing, and the client was configured to throw when this occurs (mock)', async () => {
     const clientConfig = {
       ...accountConfigValid,
-      shouldThrowOnMissingAlt: true,
-    };
+      shouldThrowOnMissingAlt: true
+    }
     const fetchFromCloudinary = makeGenericAPIClient(
       clientConfig,
       makeMockFetchWithMissingImageAttr({ alt: true })
-    );
-    const publicId = PUBLIC_ID_MISSING_ALT;
-    const expectedErrorMessage = messageImageHasNoAlt(publicId);
+    )
+    const publicId = PUBLIC_ID_MISSING_ALT
+    const expectedErrorMessage = messageImageHasNoAlt(publicId)
 
     expect(async () => {
-      await fetchFromCloudinary(publicId);
-    }).rejects.toThrowError(expectedErrorMessage);
-  });
+      await fetchFromCloudinary(publicId)
+    }).rejects.toThrowError(expectedErrorMessage)
+  })
 
   it('throws with the expected error message when the image `caption` is missing, and the client was configured to throw when this occurs (mock)', async () => {
     const clientConfig = {
       ...accountConfigValid,
-      shouldThrowOnMissingCaption: true,
-    };
+      shouldThrowOnMissingCaption: true
+    }
     const fetchFromCloudinary = makeGenericAPIClient(
       clientConfig,
       makeMockFetchWithMissingImageAttr({ caption: true })
-    );
-    const publicId = PUBLIC_ID_MISSING_CAPTION;
-    const expectedErrorMessage = messageImageHasNoCaption(publicId);
+    )
+    const publicId = PUBLIC_ID_MISSING_CAPTION
+    const expectedErrorMessage = messageImageHasNoCaption(publicId)
 
     expect(async () => {
-      await fetchFromCloudinary(publicId);
-    }).rejects.toThrowError(expectedErrorMessage);
-  });
-});
+      await fetchFromCloudinary(publicId)
+    }).rejects.toThrowError(expectedErrorMessage)
+  })
+})
 
 describe('fetchFromCloudinary (network)', () => {
   // 11ty Cache options
   const cacheOptions = {
     directory: '.cache',
     duration: '5s',
-    type: 'json' as 'buffer' | 'json' | 'text',
-  };
+    type: 'json' as 'buffer' | 'json' | 'text'
+  }
 
   it('throws when configured with invalid Cloudinary account credentials (network)', async () => {
     const clientConfigWithInvalidCredentials = {
       apiKey: 'invalid_api_key',
       apiSecret: 'invalid_api_secret',
-      cloudName: 'invalid_clound_name',
-    };
+      cloudName: 'invalid_clound_name'
+    }
     const fetchFromCloudinary = makeAPIClient(
       clientConfigWithInvalidCredentials,
       cacheOptions
-    );
-    const publicId = 'public_id_of_an_image';
+    )
+    const publicId = 'public_id_of_an_image'
 
     try {
-      await fetchFromCloudinary(publicId);
-      expect(true).toBe(false); // so if fetch succeeds, this test fails
+      await fetchFromCloudinary(publicId)
+      expect(true).toBe(false) // so if fetch succeeds, this test fails
     } catch (e) {
-      expect(e.message).toContain('401');
-      expect(e.message).toContain('Unauthorized');
+      const msg = (e as any).message as string
+      expect(msg).toContain('401')
+      expect(msg).toContain('Unauthorized')
     }
-  });
+  })
 
   it('returns an image response with width,height,alt,caption (network)', async () => {
-    const fetchFromCloudinary = makeAPIClient(accountConfigValid, cacheOptions);
-    const publicId = process.env.CLOUDINARY_IMAGE_PUBLIC_ID as string;
+    const fetchFromCloudinary = makeAPIClient(accountConfigValid, cacheOptions)
+    const publicId = process.env.CLOUDINARY_IMAGE_PUBLIC_ID as string
 
-    const result = await fetchFromCloudinary(publicId);
+    const result = await fetchFromCloudinary(publicId)
 
-    expect(result).toHaveProperty('width');
-    expect(result).toHaveProperty('height');
-    expect(result).toHaveProperty('alt');
-    expect(result).toHaveProperty('caption');
-  });
+    expect(result).toHaveProperty('width')
+    expect(result).toHaveProperty('height')
+    expect(result).toHaveProperty('alt')
+    expect(result).toHaveProperty('caption')
+  })
 
+  // TODO: write a better test to ensure that the second time we got a cached response
   it('returns a cached response (network)', async () => {
-    const fetchFromCloudinary = makeAPIClient(accountConfigValid, cacheOptions);
-    const publicId = process.env.CLOUDINARY_IMAGE_PUBLIC_ID as string;
+    const fetchFromCloudinary = makeAPIClient(accountConfigValid, cacheOptions)
+    const publicId = process.env.CLOUDINARY_IMAGE_PUBLIC_ID as string
 
-    const fresh = await fetchFromCloudinary(publicId);
-    expect(fresh).toBeTruthy();
+    const fresh = await fetchFromCloudinary(publicId)
+    expect(fresh).toBeTruthy()
 
-    const cached = await fetchFromCloudinary(publicId);
-    expect(cached).toBeTruthy();
-  });
-});
+    const cached = await fetchFromCloudinary(publicId)
+    expect(cached).toBeTruthy()
+  })
+})

@@ -1,0 +1,39 @@
+name: 'Check npm package sizes'
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  check-file-sizes:
+    name: Check file sizes on ${{ matrix.os }}, Node.js ${{ matrix.node }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: ['16.x']
+    steps:
+      - name: 🛎️ Checkout repo
+        uses: actions/checkout@v3
+      - name: ⚙️ Setup Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm version
+      - name: ⚙️ Install dependencies
+        run: npm ci
+      - name: 🔧 Build package
+        run: npm run build
+      - name: 📦 Package size report
+        # https://github.com/marketplace/actions/pkg-size-action
+        uses: pkg-size/action@v1
+        with:
+          hide-files: '*.js.map'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: 📦 Check file sizes with BundleWatch
+        env:
+          BUNDLEWATCH_GITHUB_TOKEN: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
+        run: npx bundlewatch --config ./config/bundlewatch.js
