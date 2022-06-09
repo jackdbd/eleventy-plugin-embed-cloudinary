@@ -1,8 +1,6 @@
 const path = require('node:path')
 
-const commitlint_config_path = path.join('config', 'commitlint.cjs')
-// const commitlint_config_path = path.resolve('config', 'commitlint.cjs')
-// console.log('commitlint config', commitlint_config_path)
+const commitlint_config_path = path.resolve('config', 'commitlint.cjs')
 
 // I prefer to keep the configuration for the commit linter in
 // config/commitlint.cjs, so I can run npm run lint even when I am not releasing
@@ -18,6 +16,7 @@ const commit_analyzer = [
     config: commitlint_config_path
   }
 ]
+// console.log('=== commit_analyzer ===', commit_analyzer)
 
 // https://github.com/semantic-release/release-notes-generator
 const release_notes_generator = [
@@ -26,6 +25,7 @@ const release_notes_generator = [
     config: commitlint_config_path
   }
 ]
+// console.log('=== release_notes_generator ===', release_notes_generator)
 
 // https://github.com/semantic-release/changelog
 const changelog = [
@@ -92,5 +92,5 @@ const config = {
   tagFormat: 'v${version}'
 }
 
-// console.log('== semantic release config ===', config)
+console.log('== semantic release config ===', config)
 module.exports = config
