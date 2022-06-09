@@ -1,4 +1,4 @@
-name: 'Check file sizes'
+name: 'Check package size'
 
 on:
   pull_request:
