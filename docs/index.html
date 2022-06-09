@@ -1,198 +1,139 @@
-<!doctype html>
-<html class="default no-js">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>eleventy-plugin-embed-cloudinary</title>
-	<meta name="description" content="Documentation for eleventy-plugin-embed-cloudinary">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="assets/css/main.css">
-	<script async src="assets/js/search.js" id="search-script"></script>
-</head>
-<body>
-<header>
-	<div class="tsd-page-toolbar">
-		<div class="container">
-			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
-					<div class="field">
-						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
-						<input id="tsd-search-field" type="text" />
-					</div>
-					<ul class="results">
-						<li class="state loading">Preparing search index...</li>
-						<li class="state failure">The search index is not available</li>
-					</ul>
-					<a href="index.html" class="title">eleventy-plugin-embed-cloudinary</a>
-				</div>
-				<div class="table-cell" id="tsd-widgets">
-					<div id="tsd-filter">
-						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
-						<div class="tsd-filter-group">
-							<div class="tsd-select" id="tsd-filter-visibility">
-								<span class="tsd-select-label">All</span>
-								<ul class="tsd-select-list">
-									<li data-value="public">Public</li>
-									<li data-value="protected">Public/Protected</li>
-									<li data-value="private" class="selected">All</li>
-								</ul>
-							</div>
-							<input type="checkbox" id="tsd-filter-inherited" checked />
-							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
-							<input type="checkbox" id="tsd-filter-externals" checked />
-							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
-						</div>
-					</div>
-					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="tsd-page-title">
-		<div class="container">
-			<h1>eleventy-plugin-embed-cloudinary</h1>
-		</div>
-	</div>
-</header>
-<div class="container container-main">
-	<div class="row">
-		<div class="col-8 col-content">
-			<div class="tsd-panel tsd-typography">
-				<a href="#eleventy-plugin-embed-cloudinary" id="eleventy-plugin-embed-cloudinary" style="color: inherit; text-decoration: none;">
-					<h1>eleventy-plugin-embed-cloudinary</h1>
-				</a>
-				<p><a href="https://badge.fury.io/js/eleventy-plugin-embed-cloudinary"><img src="https://badge.fury.io/js/eleventy-plugin-embed-cloudinary.svg" alt="npm version"></a> <img src="https://img.shields.io/snyk/vulnerabilities/npm/eleventy-plugin-embed-cloudinary" alt="Snyk Vulnerabilities for npm package"> <img src="https://github.com/jackdbd/eleventy-plugin-embed-cloudinary/actions/workflows/ci.yml/badge.svg" alt="ci workflow"> <a href="https://coveralls.io/github/jackdbd/eleventy-plugin-embed-cloudinary?branch=main"><img src="https://coveralls.io/repos/github/jackdbd/eleventy-plugin-embed-cloudinary/badge.svg?branch=main" alt="Coverage Status"></a> <a href="https://www.codefactor.io/repository/github/jackdbd/eleventy-plugin-embed-cloudinary"><img src="https://www.codefactor.io/repository/github/jackdbd/eleventy-plugin-embed-cloudinary/badge" alt="CodeFactor"></a></p>
-				<p>Eleventy plugin to automatically embed in markdown files any image hosted on your Cloudinary Media Library.</p>
-				<p>Write a URL → get a <a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images">responsive image</a>.</p>
-				<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-				<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-				<details>
-					<summary>Table of Contents</summary>
-					<ul>
-						<li><a href="#installation">Installation</a></li>
-						<li><a href="#usage">Usage</a></li>
-						<li><a href="#configuration">Configuration</a><ul>
-								<li><a href="#required">Required</a></li>
-								<li><a href="#optional">Optional</a></li>
-							</ul>
-						</li>
-						<li><a href="#release-management">Release management</a></li>
-					</ul>
-				</details>
-				<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
-					<h2>Installation</h2>
-				</a>
-				<p>Install with npm or yarn.</p>
-				<pre><code class="language-shell"><span style="color: #000000">npm i -D eleventy-plugin-embed-cloudinary</span>
-</code></pre>
-				<p>Add this plugin to your Eleventy config file (usually <code>.eleventy.js</code>):</p>
-				<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">embedCloudinary</span><span style="color: #000000"> = </span><span style="color: #795E26">require</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;eleventy-plugin-embed-cloudinary&#039;</span><span style="color: #000000">);</span>
+<!DOCTYPE html><html class="default"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>eleventy-plugin-embed-cloudinary</title><meta name="description" content="Documentation for eleventy-plugin-embed-cloudinary"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.body.classList.add(localStorage.getItem("tsd-theme") || "os")</script><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">eleventy-plugin-embed-cloudinary</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label><input type="checkbox" id="tsd-filter-externals" checked/><label class="tsd-widget" for="tsd-filter-externals">Externals</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><h1>eleventy-plugin-embed-cloudinary </h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><div class="tsd-panel tsd-typography">
+<a href="#eleventy-plugin-embed-cloudinary" id="eleventy-plugin-embed-cloudinary" style="color: inherit; text-decoration: none;">
+  <h1>eleventy-plugin-embed-cloudinary</h1>
+</a>
+<p><a href="https://badge.fury.io/js/eleventy-plugin-embed-cloudinary"><img src="https://badge.fury.io/js/eleventy-plugin-embed-cloudinary.svg" alt="npm version"></a> <img src="https://img.shields.io/snyk/vulnerabilities/npm/eleventy-plugin-embed-cloudinary" alt="Snyk Vulnerabilities for npm package"> <img src="https://github.com/jackdbd/eleventy-plugin-embed-cloudinary/actions/workflows/ci.yml/badge.svg" alt="ci workflow"> <a href="https://codecov.io/gh/jackdbd/eleventy-plugin-embed-cloudinary"><img src="https://codecov.io/gh/jackdbd/eleventy-plugin-embed-cloudinary/branch/main/graph/badge.svg?token=evryHx64zZ" alt="codecov"></a> <a href="https://www.codefactor.io/repository/github/jackdbd/eleventy-plugin-embed-cloudinary"><img src="https://www.codefactor.io/repository/github/jackdbd/eleventy-plugin-embed-cloudinary/badge" alt="CodeFactor"></a> <a href="https://sonarcloud.io/dashboard?id=jackdbd_eleventy-plugin-embed-cloudinary"><img src="https://sonarcloud.io/api/project_badges/measure?project=jackdbd_eleventy-plugin-embed-cloudinary&metric=alert_status" alt="Quality Gate Status"></a></p>
+<p>Write an image URL → get a responsive image.</p>
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+<details><summary>Table of Contents</summary>
 
-<span style="color: #267F99">module</span><span style="color: #000000">.</span><span style="color: #267F99">exports</span><span style="color: #000000"> = </span><span style="color: #0000FF">function</span><span style="color: #000000">(</span><span style="color: #001080">eleventyConfig</span><span style="color: #000000">) {</span>
-<span style="color: #000000">  </span><span style="color: #001080">eleventyConfig</span><span style="color: #000000">.</span><span style="color: #795E26">addPlugin</span><span style="color: #000000">(</span><span style="color: #001080">embedCloudinary</span><span style="color: #000000">, {</span>
-<span style="color: #000000">    </span><span style="color: #001080">apiKey:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;YOUR_CLOUDINARY_API_KEY&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">    </span><span style="color: #001080">apiSecret:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;YOUR_CLOUDINARY_API_SECRET&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">    </span><span style="color: #001080">cloudName:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;YOUR_CLOUDINARY_CLOUD_NAME&#039;</span>
-<span style="color: #000000">  });</span>
-<span style="color: #000000">};</span>
-</code></pre>
-				<p>Your API key and API secret are <strong>not</strong> exposed in the generated HTML. They are used to fetch the images hosted on your Cloudinary Media Library at build time.</p>
-				<p>⚠️ Don&#39;t forget to set the Cloudinary API key, API secret and cloud name on your build server. For example you could use <a href="https://docs.netlify.com/configure-builds/environment-variables/">Netlify environment variables</a>, <a href="https://docs.github.com/en/actions/reference/encrypted-secrets">GitHub secrets</a>, etc.</p>
-				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
-					<h2>Usage</h2>
-				</a>
-				<p>In your markdown file, just paste the URL of the image you want to include. The URL should be the <strong>only thing on that line</strong>. The image must be hosted on your Cloudinary Media Library.</p>
-				<pre><code class="language-mk">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vehicula, elit vel condimentum porta, purus.
+<ul>
+<li><a href="#what-is-this">What is this?</a></li>
+<li><a href="#why">Why?</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#configuration">Configuration</a><ul>
+<li><a href="#required-parameters">Required parameters</a></li>
+<li><a href="#options">Options</a></li>
+<li><a href="#image-version-and-image-public-id">Image version and image public ID</a></li>
+</ul>
+</li>
+</ul>
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+</details>
 
-https://res.cloudinary.com/CLOUD_NAME/image/upload/VERSION/PUBLIC_ID.png
+
+<a href="#what-is-this" id="what-is-this" style="color: inherit; text-decoration: none;">
+  <h2>What is this?</h2>
+</a>
+<p>This library is an <a href="https://www.11ty.dev/docs/plugins/">Eleventy plugin</a> that will let you write an <strong>image URL</strong> like this in your markdown...</p>
+<pre><code class="language-mk">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vehicula, elit vel condimentum porta, purus.
+
+https://res.cloudinary.com/YOUR_CLOUDINARY_CLOUD_NAME/image/upload/YOUR_IMAGE_VERSION/YOUR_IMAGE_PUBLIC_ID.png
 
 Maecenas non velit nibh. Aenean eu justo et odio commodo ornare. In scelerisque sapien at.
 </code></pre>
-				<p>Where:</p>
-				<ul>
-					<li><code>CLOUD_NAME</code> is your Cloudinary <a href="https://cloudinary.com/documentation/how_to_integrate_cloudinary#create_and_tour_your_account">cloud name</a>;</li>
-					<li><code>PUBLIC_ID</code> is the <a href="https://cloudinary.com/documentation/upload_images#public_id">unique identifier</a> for the image hosted on your Cloudinary Media Library;</li>
-					<li><code>VERSION</code> is the <a href="https://cloudinary.com/documentation/upload_images#asset_versions">asset version</a> of the image.</li>
-				</ul>
-				<a href="#configuration" id="configuration" style="color: inherit; text-decoration: none;">
-					<h2>Configuration</h2>
-				</a>
-				<a href="#required" id="required" style="color: inherit; text-decoration: none;">
-					<h3>Required</h3>
-				</a>
-				<ul>
-					<li><code>apiKey</code> [string]: API key of your Cloudinary account</li>
-					<li><code>apiSecret</code> [string]: API secret of your Cloudinary account</li>
-					<li><code>cloudName</code> [string]: cloud name of your Cloudinary account</li>
-				</ul>
-				<a href="#optional" id="optional" style="color: inherit; text-decoration: none;">
-					<h3>Optional</h3>
-				</a>
-				<ul>
-					<li><code>cacheDirectory</code> [string] [default: <code>.cache</code>]: directory where the 11ty <code>Cache</code> (see <a href="https://github.com/11ty/eleventy-cache-assets">eleventy-cache-assets</a>) stores the responses from the Cloudinary API (it is strongly recommended that you add this folder to your <code>.gitignore</code> file).</li>
-					<li><code>cacheDuration</code> [string] [default: <code>30m</code>]: how long a response stored in the 11ty <code>Cache</code> should be considered valid. For the syntax, see <a href="https://www.11ty.dev/docs/plugins/cache/#change-the-cache-duration">here</a>.</li>
-					<li><code>classString</code> [string] [default: <code>&quot;&quot;</code>]: CSS class/es to apply to the generated <code>&lt;img&gt;</code> element.</li>
-					<li><code>shouldLazyLoad</code> [boolean] [default: <code>true</code>]: whether the generated <code>&lt;img&gt;</code> element should have the attribute <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-loading">loading=&quot;lazy&quot;</a> to instruct the browser to <a href="https://web.dev/browser-level-image-lazy-loading/">defer loading the image</a> (browser support <a href="https://caniuse.com/loading-lazy-attr">here</a>).</li>
-					<li><code>shouldThrowOnMissingAlt</code> [boolean] [default: <code>false</code>]: whether this plugin should throw an error when fetching an image that does not have an <code>alt</code> attribute. See <a href="https://support.cloudinary.com/hc/en-us/articles/202521142-Can-I-add-metadata-to-images-">here</a> how to add a Description (alt) to an image hosted on your Cloudinary Media Library.</li>
-					<li><code>shouldThrowOnMissingCaption</code> [boolean] [default: <code>false</code>]: whether this plugin should throw an error when fetching an image that does not have a <code>caption</code> attribute. See <a href="https://support.cloudinary.com/hc/en-us/articles/202521142-Can-I-add-metadata-to-images-">here</a> how to add a Title (caption) to an image hosted on your Cloudinary Media Library.</li>
-				</ul>
-				<a href="#release-management" id="release-management" style="color: inherit; text-decoration: none;">
-					<h2>Release management</h2>
-				</a>
-				<p>This project uses a combination of bash scripts, <a href="https://github.com/davidchambers/xyz">xyz</a>, <a href="https://github.com/cookpete/auto-changelog">auto-changelog</a> and the <a href="https://github.com/cli/cli">GitHub CLI</a> to update the <code>CHANGELOG.md</code>, create a new GitHub release, and publish a new version of the <a href="https://www.npmjs.com/package/eleventy-plugin-embed-cloudinary">package on npm</a>.</p>
-				<p>The version number is assigned according to <a href="http://semver.org/">Semantic Versioning</a>.</p>
-				<pre><code class="language-sh"><span style="color: #000000">npm run release:patch</span>
-<span style="color: #000000">npm run release:minor</span>
-<span style="color: #000000">npm run release:major</span>
+<p>...and it will transform the image URL into a <a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images">responsive image</a>, optimized for your website visitor&#39;s device and browser:</p>
+<pre><code class="language-html"><span class="hl-6">&lt;</span><span class="hl-7">p</span><span class="hl-6">&gt;</span><span class="hl-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vehicula, elit vel condimentum porta, purus.</span><span class="hl-6">&lt;/</span><span class="hl-7">p</span><span class="hl-6">&gt;</span><br/><br/><span class="hl-6">&lt;</span><span class="hl-7">img</span><br/><span class="hl-1">  </span><span class="hl-8">alt</span><span class="hl-1">=</span><span class="hl-9">&quot;title of your image, retrieved automatically from Cloudinary at build time&quot;</span><br/><span class="hl-1">  </span><span class="hl-8">class</span><span class="hl-1">=</span><span class="hl-9">&quot;CSS class/es to apply to all all </span><span class="hl-10">&lt;</span><span class="hl-9">img&gt; elements generated by this plugin&quot;</span><br/><span class="hl-1">  </span><span class="hl-8">src</span><span class="hl-1">=</span><span class="hl-9">&quot;URL of the image hosted on your Cloudinary Media Library&quot;</span><br/><span class="hl-1">  </span><span class="hl-8">srcset</span><span class="hl-1">=</span><span class="hl-9">&quot;comma-separated URLs of images transformed by Cloudinary (see details below)&quot;</span><br/><span class="hl-1">  </span><span class="hl-8">sizes</span><span class="hl-1">=</span><span class="hl-9">&quot;media condition + comma-separated source size values (see details below)&quot;</span><br/><span class="hl-1">  </span><span class="hl-8">width</span><span class="hl-1">=</span><span class="hl-9">&quot;width of your image, retrieved automatically from Cloudinary at build time&quot;</span><br/><span class="hl-1">  </span><span class="hl-8">height</span><span class="hl-1">=</span><span class="hl-9">&quot;height of your image, retrieved automatically from Cloudinary at build time&quot;</span><br/><span class="hl-1">  </span><span class="hl-8">loading</span><span class="hl-1">=</span><span class="hl-9">&quot;whether the image should be loaded using native lazy loading or not&quot;</span><br/><span class="hl-6">/&gt;</span><br/><br/><span class="hl-6">&lt;</span><span class="hl-7">p</span><span class="hl-6">&gt;</span><span class="hl-1">Maecenas non velit nibh. Aenean eu justo et odio commodo ornare. In scelerisque sapien at.</span><span class="hl-6">&lt;/</span><span class="hl-7">p</span><span class="hl-6">&gt;</span>
 </code></pre>
-				<p>Package size checked with <a href="https://bundlewatch.io/#/">BundleWatch</a>.</p>
-			</div>
-		</div>
-		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
-			<nav class="tsd-navigation primary">
-				<ul>
-					<li class=" ">
-						<a href="modules.html">Exports</a>
-					</li>
-				</ul>
-			</nav>
-			<nav class="tsd-navigation secondary menu-sticky">
-				<ul class="before-current">
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/cloudinaryauthconfig.html" class="tsd-kind-icon">Cloudinary<wbr>Auth<wbr>Config</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/cloudinaryclientoptions.html" class="tsd-kind-icon">Cloudinary<wbr>Client<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/noncloudinaryoptions.html" class="tsd-kind-icon">Non<wbr>Cloudinary<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="modules.html#userconfig" class="tsd-kind-icon">User<wbr>Config</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#default" class="tsd-kind-icon">default</a>
-					</li>
-				</ul>
-			</nav>
-		</div>
-	</div>
-</div>
-<footer class="with-border-bottom">
-	<div class="container">
-		<h2>Legend</h2>
-		<div class="tsd-legend-group">
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
-			</ul>
-		</div>
-	</div>
-</footer>
-<div class="container tsd-generator">
-	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
-</div>
-<div class="overlay"></div>
-<script src="assets/js/main.js"></script>
-</body>
-</html>
+
+<a href="#why" id="why" style="color: inherit; text-decoration: none;">
+  <h2>Why?</h2>
+</a>
+<p>Image optimization is <a href="https://web.dev/fast/#optimize-your-images">hard</a> and involves all of these steps:</p>
+<ol>
+<li>serving the best available <strong>image format</strong> (e.g. <a href="https://caniuse.com/?search=AVIF">AVIF</a>, <a href="https://caniuse.com/?search=WebP">WebP</a>) supported by your website visitors&#39; browser.</li>
+<li>picking the best <strong>resolution</strong> for each device used by your website visitors (you need to consider <a href="https://archive.fosdem.org/2021/schedule/event/webperf_making_rum_responsive/">screen quality, Device Pixel Ratio, etc</a>).</li>
+<li>defining appropriate <strong>caching policies</strong> for your images (see <a href="https://jakearchibald.com/2016/caching-best-practices/">Caching best practices &amp; max-age gotchas</a>).</li>
+<li>optimizing your images for <strong>SEO</strong> and <strong>accessibility</strong>.</li>
+<li>loading images <strong>lazily</strong>, not eagerly.</li>
+</ol>
+<p>Even if you are a master of all of these things, it is still a lot of work. An <a href="https://web.dev/image-cdns/">image CDN</a> like Cloudinary will take care of steps 1-3 (format, resolution, caching policies), so it will likely save you a lot of time. You just need to <strong>upload your highest resolution image</strong> to your Cloudinary Media Library and add <code>alt</code> and <code>title</code> metadata for SEO and accessibility.</p>
+
+<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+  <h2>Installation</h2>
+</a>
+<p>Install the plugin with your package manager of choice (npm, yarn, pnpm).</p>
+<pre><code class="language-sh"><span class="hl-1">npm i -D eleventy-plugin-embed-cloudinary</span>
+</code></pre>
+<p>Add this plugin to your <a href="https://www.11ty.dev/docs/config/">Eleventy configuration file</a> (usually <code>.eleventy.js</code>):</p>
+<pre><code class="language-js"><span class="hl-0">const</span><span class="hl-1"> </span><span class="hl-2">embedCloudinary</span><span class="hl-1"> = </span><span class="hl-3">require</span><span class="hl-1">(</span><span class="hl-4">&#39;eleventy-plugin-embed-cloudinary&#39;</span><span class="hl-1">);</span><br/><br/><span class="hl-11">module</span><span class="hl-1">.</span><span class="hl-11">exports</span><span class="hl-1"> = </span><span class="hl-0">function</span><span class="hl-1">(</span><span class="hl-5">eleventyConfig</span><span class="hl-1">) {</span><br/><span class="hl-1">  </span><span class="hl-5">eleventyConfig</span><span class="hl-1">.</span><span class="hl-3">addPlugin</span><span class="hl-1">(</span><span class="hl-5">embedCloudinary</span><span class="hl-1">, {</span><br/><span class="hl-1">    </span><span class="hl-5">apiKey:</span><span class="hl-1"> </span><span class="hl-4">&#39;YOUR_CLOUDINARY_API_KEY&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-5">apiSecret:</span><span class="hl-1"> </span><span class="hl-4">&#39;YOUR_CLOUDINARY_API_SECRET&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-5">cloudName:</span><span class="hl-1"> </span><span class="hl-4">&#39;YOUR_CLOUDINARY_CLOUD_NAME&#39;</span><br/><span class="hl-1">  });</span><br/><span class="hl-1">};</span>
+</code></pre>
+<p>Your API key and API secret are <strong>not</strong> exposed in the generated HTML. They are used to fetch the images hosted on your Cloudinary Media Library when Eleventy builds your site.</p>
+<blockquote>
+<p>:warning: Don&#39;t forget to set the Cloudinary <strong>API key</strong>, <strong>API secret</strong> and <strong>cloud name</strong> on your build server. For example, if your build runs on the Github CI, use <a href="https://docs.github.com/en/actions/reference/encrypted-secrets">GitHub secrets</a>; if the build runs on Netlify, use <a href="https://docs.netlify.com/configure-builds/environment-variables/">Build environment variables</a>.</p>
+</blockquote>
+
+<a href="#configuration" id="configuration" style="color: inherit; text-decoration: none;">
+  <h2>Configuration</h2>
+</a>
+
+<a href="#required-parameters" id="required-parameters" style="color: inherit; text-decoration: none;">
+  <h3>Required parameters</h3>
+</a>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>apiKey</code></td>
+<td>Your Cloudinary API key.</td>
+</tr>
+<tr>
+<td><code>apiSecret</code></td>
+<td>Your Cloudinary API secret.</td>
+</tr>
+<tr>
+<td><code>cloudName</code></td>
+<td>Your Cloudinary <a href="(https://cloudinary.com/documentation/how_to_integrate_cloudinary#create_and_tour_your_account)">cloud name</a>.</td>
+</tr>
+</tbody></table>
+
+<a href="#options" id="options" style="color: inherit; text-decoration: none;">
+  <h3>Options</h3>
+</a>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Default</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>cacheDirectory</code></td>
+<td><code>.cache</code></td>
+<td>Directory where the 11ty <code>Cache</code> (see <a href="https://github.com/11ty/eleventy-cache-assets">eleventy-cache-assets</a>) stores the responses from the Cloudinary API. It is strongly recommended that you add this folder to your <code>.gitignore</code> file.</td>
+</tr>
+<tr>
+<td><code>cacheDuration</code></td>
+<td><code>30m</code></td>
+<td>How long a response stored in the 11ty <code>Cache</code> should be considered valid. For the syntax, see <a href="https://www.11ty.dev/docs/plugins/cache/#change-the-cache-duration">here</a>.</td>
+</tr>
+<tr>
+<td><code>classString</code></td>
+<td><code>&quot;&quot;</code></td>
+<td>CSS class/es to apply to the generated <code>&lt;img&gt;</code> element.</td>
+</tr>
+<tr>
+<td><code>shouldLazyLoad</code></td>
+<td><code>true</code></td>
+<td>Whether the generated <code>&lt;img&gt;</code> element should have the attribute <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-loading">loading=&quot;lazy&quot;</a> to instruct the browser to <a href="https://web.dev/browser-level-image-lazy-loading/">defer loading the image</a> (browser support <a href="https://caniuse.com/loading-lazy-attr">here</a>).</td>
+</tr>
+<tr>
+<td><code>shouldThrowOnMissingAlt</code></td>
+<td><code>false</code></td>
+<td>Whether this plugin should throw an error when fetching an image that does not have an <code>alt</code> attribute. See <a href="https://support.cloudinary.com/hc/en-us/articles/202521142-Can-I-add-metadata-to-images-">here</a> how to add a Description (alt) to an image hosted on your Cloudinary Media Library.</td>
+</tr>
+</tbody></table>
+
+<a href="#image-version-and-image-public-id" id="image-version-and-image-public-id" style="color: inherit; text-decoration: none;">
+  <h3>Image version and image public ID</h3>
+</a>
+<p>For each image URL you write in your markdown files, you will need to specify its <a href="https://cloudinary.com/documentation/upload_images#public_id">public ID</a> (it&#39;s the last part of the URL, without the file extension) and its <a href="https://cloudinary.com/documentation/upload_images#asset_versions">version</a>.</p>
+<pre><code class="language-mk">https://res.cloudinary.com/YOUR_CLOUDINARY_CLOUD_NAME/image/upload/YOUR_IMAGE_VERSION/YOUR_IMAGE_PUBLIC_ID.png
+</code></pre>
+</div></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class="current"><a href="modules.html">Exports</a></li></ul></nav><nav class="tsd-navigation secondary menu-sticky"><ul><li class="tsd-kind-interface"><a href="interfaces/CloudinaryAuthConfig.html" class="tsd-kind-icon">Cloudinary<wbr/>Auth<wbr/>Config</a></li><li class="tsd-kind-interface"><a href="interfaces/CloudinaryClientOptions.html" class="tsd-kind-icon">Cloudinary<wbr/>Client<wbr/>Options</a></li><li class="tsd-kind-interface"><a href="interfaces/NonCloudinaryOptions.html" class="tsd-kind-icon">Non<wbr/>Cloudinary<wbr/>Options</a></li><li class="tsd-kind-type-alias"><a href="modules.html#UserConfig" class="tsd-kind-icon">User<wbr/>Config</a></li><li class="tsd-kind-function"><a href="modules.html#default" class="tsd-kind-icon">default</a></li></ul></nav></div></div></div><footer class="with-border-bottom"><div class="container"><h2>Legend</h2><div class="tsd-legend-group"><ul class="tsd-legend"><li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li></ul></div><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="container tsd-generator"><p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div><div class="overlay"></div><script src="assets/main.js"></script></body></html>

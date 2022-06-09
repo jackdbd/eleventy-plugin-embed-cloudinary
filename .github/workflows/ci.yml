@@ -46,7 +46,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_BOT_GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.SEMANTIC_RELEASE_BOT_NPM_TOKEN }}
-        run: semantic-release --ci --debug
+        run: npx semantic-release --ci --debug
 
   sonarcloud:
     needs: [build-and-test]
