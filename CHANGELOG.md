@@ -1,3 +1,40 @@
+# CHANGELOG
+
+## <small>1.0.2 (2022-06-09)</small>
+
+* chore: add comment in pre-push hook ([ec12acc](https://github.com/jackdbd/eleventy-plugin-embed-cloudinary/commit/ec12acc))
+* chore: avoid creating docs with pre-push hook ([b5dd56e](https://github.com/jackdbd/eleventy-plugin-embed-cloudinary/commit/b5dd56e))
+* chore: cleanup ([cf9e8f2](https://github.com/jackdbd/eleventy-plugin-embed-cloudinary/commit/cf9e8f2))
+* chore(docs): update TOC ([c2e1528](https://github.com/jackdbd/eleventy-plugin-embed-cloudinary/commit/c2e1528))
+* docs: re-run api-extractor and typedoc ([1a1a581](https://github.com/jackdbd/eleventy-plugin-embed-cloudinary/commit/1a1a581))
+* fix: trigger for semantic release, cleanup ([75bb2d9](https://github.com/jackdbd/eleventy-plugin-embed-cloudinary/commit/75bb2d9))
+* ci: configure semantic-release and improve docs ([3d9e48b](https://github.com/jackdbd/eleventy-plugin-embed-cloudinary/commit/3d9e48b))
+* Add manual trigger to run BundleWatch workflow ([5242484](https://github.com/jackdbd/eleventy-plugin-embed-cloudinary/commit/5242484))
+* Add SonarCloud badge in README ([e0d705b](https://github.com/jackdbd/eleventy-plugin-embed-cloudinary/commit/e0d705b))
+* Add SonarCloud Scan in CI workflow ([95dcc09](https://github.com/jackdbd/eleventy-plugin-embed-cloudinary/commit/95dcc09))
+* Add workflow to generate a TOC in README ([8231677](https://github.com/jackdbd/eleventy-plugin-embed-cloudinary/commit/8231677))
+* Add workflow to notify Telegram chat when CI workflow fails ([3995043](https://github.com/jackdbd/eleventy-plugin-embed-cloudinary/commit/3995043))
+* Cleanup workflows ([4deaf10](https://github.com/jackdbd/eleventy-plugin-embed-cloudinary/commit/4deaf10))
+* Create sonarcloud config ([02406f4](https://github.com/jackdbd/eleventy-plugin-embed-cloudinary/commit/02406f4))
+* Forgot runs-on in workflow ([8210107](https://github.com/jackdbd/eleventy-plugin-embed-cloudinary/commit/8210107))
+* Generate docs with TypeDoc and API Extractor ([eb793e3](https://github.com/jackdbd/eleventy-plugin-embed-cloudinary/commit/eb793e3))
+* Notify Telegram when CI job is canceled ([358584c](https://github.com/jackdbd/eleventy-plugin-embed-cloudinary/commit/358584c))
+* Rename and update CI workflow ([0578b0e](https://github.com/jackdbd/eleventy-plugin-embed-cloudinary/commit/0578b0e))
+* Rename BundleWatch workflow and cleanup ([faffebd](https://github.com/jackdbd/eleventy-plugin-embed-cloudinary/commit/faffebd))
+* Replace size-limit with bundlewatch ([2982430](https://github.com/jackdbd/eleventy-plugin-embed-cloudinary/commit/2982430))
+* Try out some more workflows ([e18148f](https://github.com/jackdbd/eleventy-plugin-embed-cloudinary/commit/e18148f))
+* Update check-file-sizes.yml ([9b44b54](https://github.com/jackdbd/eleventy-plugin-embed-cloudinary/commit/9b44b54))
+* Update check-file-sizes.yml ([10e8d20](https://github.com/jackdbd/eleventy-plugin-embed-cloudinary/commit/10e8d20))
+* Update CI worflow ([857630a](https://github.com/jackdbd/eleventy-plugin-embed-cloudinary/commit/857630a))
+* Update ci.yml ([d6a293f](https://github.com/jackdbd/eleventy-plugin-embed-cloudinary/commit/d6a293f))
+* Update notification workflow ([055e8a1](https://github.com/jackdbd/eleventy-plugin-embed-cloudinary/commit/055e8a1))
+* Update notification workflow ([2620059](https://github.com/jackdbd/eleventy-plugin-embed-cloudinary/commit/2620059))
+* Update notification workflow ([6e832b3](https://github.com/jackdbd/eleventy-plugin-embed-cloudinary/commit/6e832b3))
+* Update notification workflow ([9809a51](https://github.com/jackdbd/eleventy-plugin-embed-cloudinary/commit/9809a51))
+* Update README ([38648e3](https://github.com/jackdbd/eleventy-plugin-embed-cloudinary/commit/38648e3))
+* Update sonarcloud config ([1829e00](https://github.com/jackdbd/eleventy-plugin-embed-cloudinary/commit/1829e00))
+* Upload test coverage only once ([ab0414d](https://github.com/jackdbd/eleventy-plugin-embed-cloudinary/commit/ab0414d))
+
 ### Changelog
 
 All notable changes to this project will be documented in this file. Dates are displayed in UTC.
