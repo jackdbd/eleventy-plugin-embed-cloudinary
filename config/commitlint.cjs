@@ -35,4 +35,5 @@ const config = {
 // TODO: what about a type of BREAKING CHANGE?
 
 // console.log('=== commitlint config ===', config)
+
 module.exports = config

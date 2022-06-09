@@ -23,7 +23,7 @@ Write an image URL → get a responsive image.
 
 This library is an [Eleventy plugin](https://www.11ty.dev/docs/plugins/) that will let you write an **image URL** like this in your markdown...
 
-```mk
+```markdown
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vehicula, elit vel condimentum porta, purus.
 
 https://res.cloudinary.com/YOUR_CLOUDINARY_CLOUD_NAME/image/upload/YOUR_IMAGE_VERSION/YOUR_IMAGE_PUBLIC_ID.png
@@ -112,6 +112,6 @@ Your API key and API secret are **not** exposed in the generated HTML. They are 
 
 For each image URL you write in your markdown files, you will need to specify its [public ID](https://cloudinary.com/documentation/upload_images#public_id) (it's the last part of the URL, without the file extension) and its [version](https://cloudinary.com/documentation/upload_images#asset_versions).
 
-```mk
+```markdown
 https://res.cloudinary.com/YOUR_CLOUDINARY_CLOUD_NAME/image/upload/YOUR_IMAGE_VERSION/YOUR_IMAGE_PUBLIC_ID.png
 ```

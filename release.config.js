@@ -92,5 +92,6 @@ const config = {
   tagFormat: 'v${version}'
 }
 
-console.log('== semantic release config ===', config)
+// console.log('== semantic release config ===', config)
+
 module.exports = config
