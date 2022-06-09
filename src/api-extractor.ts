@@ -20,13 +20,13 @@
 // See "An important limitation" in this article
 // https://api-extractor.com/pages/setup/configure_rollup/
 
-import { configFunction } from './.eleventy';
+import { configFunction } from './.eleventy'
 
 export {
   CloudinaryAuthConfig,
   NonCloudinaryOptions,
   CloudinaryClientOptions,
-  UserConfig,
-} from './config';
+  UserConfig
+} from './config'
 
-export default configFunction;
+export default configFunction

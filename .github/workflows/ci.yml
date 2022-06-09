@@ -1,73 +1,62 @@
 name: CI
+
 on:
+  pull_request:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
+
 jobs:
   build-and-test:
-    name: CI on ${{ matrix.os }}, Node ${{ matrix.node }}
+    name: Build and test on ${{ matrix.os }}, Node.js ${{ matrix.node }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macOS-latest]
-        node: ['10.x','12.x', '14.x']
-    env:
-      CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
-      CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
-      CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
-      CLOUDINARY_IMAGE_PUBLIC_ID: ${{ secrets.CLOUDINARY_IMAGE_PUBLIC_ID }}
+        os: [ubuntu-latest]
+        # os: [ubuntu-latest, windows-latest, macOS-latest]
+        # node: ['14.x', '16.x']
+        node: ['16.x']
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
-      - name: Use Node ${{ matrix.node }}
-        uses: actions/setup-node@v1
+      - name: 🛎️ Checkout repo
+        uses: actions/checkout@v3
+      - name: ⚙️ Setup Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
-      - name: Install dependencies
-        run: rm package-lock.json && npm install
-      - name: Build
+      - run: npm version
+      - name: ⚙️ Install dependencies
+        run: npm ci
+      - name: 🔧 Build package
         run: npm run build
-      - name: Test
-        run: npm run test --ci --maxWorkers=2
-  coverage:
-    name: Test coverage
-    runs-on: ubuntu-latest
-    env:
-      CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
-      CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
-      CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
-      CLOUDINARY_IMAGE_PUBLIC_ID: ${{ secrets.CLOUDINARY_IMAGE_PUBLIC_ID }}
-      NODE_VERSION: 12.x
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
-      - name: Use Node ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-      - name: Install dependencies
-        run: rm package-lock.json && npm install
-      - name: Test
+      - name: 🔍 Test package
+        env:
+          CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
+          CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
+          CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
+          CLOUDINARY_IMAGE_PUBLIC_ID: ${{ secrets.CLOUDINARY_IMAGE_PUBLIC_ID }}
         run: npm run test --ci --coverage --maxWorkers=2
-      - name: Upload coverage report to Coveralls
-        # https://github.com/coverallsapp/github-action
-        uses: coverallsapp/github-action@v1.1.2
+      - name: ⬆️ Upload test coverage to Codecov
+        # https://github.com/marketplace/actions/codecov
+        uses: codecov/codecov-action@v3.1.0
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          fail_ci_if_error: true
+          verbose: true
+      - name: 🚀 Release to npm with semantic-release
+        # if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: npm run release:dry
+
   sonarcloud:
+    needs: [build-and-test]
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout repo
-      uses: actions/checkout@v2
-      with:
-        # Disabling shallow clone is recommended for improving relevancy of reporting
-        fetch-depth: 0
-    - name: SonarCloud Scan
-      # https://github.com/sonarsource/sonarcloud-github-action
-      uses: sonarsource/sonarcloud-github-action@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: 🛎️ Checkout repo
+        uses: actions/checkout@v3
+        with:
+          # Disabling shallow clone is recommended for improving relevancy of reporting
+          fetch-depth: 0
+      - name: 🔍 SonarCloud Scan
+        # https://github.com/sonarsource/sonarcloud-github-action
+        uses: sonarsource/sonarcloud-github-action@v1.6
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
