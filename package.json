@@ -50,13 +50,7 @@
     "postpack": "./scripts/restore-package-json && ./scripts/create-github-release",
     "precommit": "run-s 'lint' 'doctoc'",
     "prepush": "run-s 'commitlint' 'bundlewatch' 'test'",
-    "prerelease": "echo PRELEASE",
     "release:dry": "semantic-release --dry-run",
-    "release": "xyz --branch main --publish-command 'npm publish' --script './scripts/update-changelog'",
-    "release:patch": "npm run release -- --increment patch",
-    "release:minor": "npm run release -- --increment minor",
-    "release:major": "npm run release -- --increment major",
-    "postrelease": "echo 'See package on npm' && chromium-browser https://www.npmjs.com/package/eleventy-plugin-embed-cloudinary",
     "start": "tsdx watch --entry ./src/.eleventy.ts --target node --verbose",
     "test": "tsdx test --detectOpenHandles --coverage=true --verbose",
     "test:config": "tsdx test --showConfig"
@@ -84,7 +78,6 @@
     "tsdx": "0.14.1",
     "tslib": "^2.4.0",
     "typedoc": "^0.22.17",
-    "typescript": "4.7.3",
-    "xyz": "4.0.0"
+    "typescript": "4.7.3"
   }
 }

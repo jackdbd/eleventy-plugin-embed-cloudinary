@@ -41,9 +41,12 @@ jobs:
         with:
           fail_ci_if_error: true
           verbose: true
-      - name: 🚀 Release to npm with semantic-release
-        # if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: npm run release:dry
+      - name: 🚀 Release with semantic-release
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        env:
+          GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_BOT_GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.SEMANTIC_RELEASE_BOT_NPM_TOKEN }}
+        run: semantic-release --ci --debug
 
   sonarcloud:
     needs: [build-and-test]
