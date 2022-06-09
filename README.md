@@ -107,6 +107,7 @@ Your API key and API secret are **not** exposed in the generated HTML. They are 
 | `classString` | `""` | CSS class/es to apply to the generated `<img>` element. |
 | `shouldLazyLoad` | `true` | Whether the generated `<img>` element should have the attribute [loading="lazy"](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-loading) to instruct the browser to [defer loading the image](https://web.dev/browser-level-image-lazy-loading/) (browser support [here](https://caniuse.com/loading-lazy-attr)). |
 | `shouldThrowOnMissingAlt` | `false` | Whether this plugin should throw an error when fetching an image that does not have an `alt` attribute. See [here](https://support.cloudinary.com/hc/en-us/articles/202521142-Can-I-add-metadata-to-images-) how to add a Description (alt) to an image hosted on your Cloudinary Media Library. |
+| `shouldThrowOnMissingCaption` | `false` | Whether this plugin should throw an error when fetching an image that does not have a `caption` attribute. See [here](https://support.cloudinary.com/hc/en-us/articles/202521142-Can-I-add-metadata-to-images-) how to add a Title (caption) to an image hosted on your Cloudinary Media Library. |
 
 ### Image version and image public ID
 
