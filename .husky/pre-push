@@ -10,4 +10,7 @@ set -eu
 
 echo "PRE PUSH HOOK [destination remote: $1] [location remote: $2]"
 
+# TODO: ideally we do NOT want to run this git hook when the git plugin of
+# semantic-release pushes tags, but I still haven't found a solution for this.
+# https://stackoverflow.com/questions/20551613/git-pre-push-hook-dont-run-if-is-tags
 npm run prepush
